@@ -1,0 +1,14 @@
+#!/bin/bash
+
+MDDIR="markdown"
+OUTDIR="out"
+BIB="bib/KABK-Thesis.bib"
+CSL="bib/american-medical-association.csl"
+
+for file in $MDDIR/*.md
+do
+    FNAME=$(basename $file)
+    FBASE=${FNAME%.*}
+    pandoc $file  --to=html5 --section-divs --bibliography=$BIB --csl=$CSL >> $OUTDIR/$FBASE.html
+done
+
