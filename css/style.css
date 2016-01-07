@@ -1,9 +1,0 @@
-
-#hello {
-    font-family: serif;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    font-size: 20em;
-    transform: translate(-50%, -50%);
-}

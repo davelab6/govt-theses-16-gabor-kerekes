@@ -1,0 +1,16 @@
+{
+  "name": "govt-theses-16-gabor-kerekes",
+  "homepage": "https://github.com/kabk/govt-theses-16-gabor-kerekes",
+  "authors": [
+    "GaborK <gabor@lustlab.net>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "less": "~2.5.3"
+  }
+}
