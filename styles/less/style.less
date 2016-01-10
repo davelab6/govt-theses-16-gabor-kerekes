@@ -1,19 +1,53 @@
 
+
+@import "fonts.less";
+
 html{
-    width: 10000px;
 }
 
 #wrapper{
     width: 100%;
-    font-family: "Source Sans Pro";
+    font-family: "Aileron Regular";
 }
 
 .article{
     font-size: 1.4em;
-    width: 40vw;
-    background-color: aliceblue;
+    display: block;
+    margin: auto;
+    width: 70vw;
+    background-color: ghostwhite;
     padding: 30px;
     margin: 20px;
-    display: inline-block;
     float: left;
+    p, .references{
+        width: 60%;
+    }
+}
+
+a{
+    text-decoration: none;
+    color: green;
+}
+
+section{
+    width: 50%;
+}
+
+#abstract{
+    background-color: whitesmoke;
+}
+
+.references{
+    font-family: monospace;
+    font-size: 0.7em;
+}
+
+#nav{
+    position: fixed;
+    top: 25px;
+    left: 80vw;
+    a{
+        display: block;
+        font-family: monospace;
+    }
 }

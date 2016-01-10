@@ -4,40 +4,37 @@
 
 window.onload = function(){
 
-    var files = [
-        "abstract.md",
-        "block-chain.md",
-        "client-server.md",
-        "designer-as-author.md",
-        "interfaces.md",
-        "movable-type.md",
-        "platforms.md",
-        "protocols.md",
-        "relational-design.md"
+    var titles = [
+        "abstract",
+        "agency",
+        "information-revolutions",
+        "beyond-interfaces",
+        "politics-of-code",
+        "relational-design"
     ];
 
-    var mds = {};
-    files.forEach(function(file, index){
+    titles.forEach(function(title, index){
 
-        $.get('markdown/'+file, function(text){
-            mds[file.split('.')[0]] = text;
-            if(index == files.length-1){
-                onMdLoaded(mds);
+        var fname = "content/html/"+title+".html";
+        $.get(fname, function(html){
+            var elem =  $(html);
+            elem.addClass('article').attr('name', title).appendTo('#wrapper');
+            $('<a>').addClass('nav-item').text(elem.find('h1').text()).attr('href', '#'+title).appendTo('#nav');
+            if(index == titles.length-1){
+                onContentLoaded();
             }
         });
 
+
     });
-
-
 };
 
-function onMdLoaded(mds){
-    var converter = new showdown.Converter();
-    for(k in mds){
-        if(mds[k]){
-            var html = converter.makeHtml(mds[k]);
-            $('<div></div>').html(html).addClass('article').appendTo( $('#wrapper') );
-        }
 
-    }
+function onContentLoaded(){
+    $('.references').each(function(){
+        if($(this).children().length > 0){
+            $(this).prepend( $('<h3>').text('References') );
+        }
+    });
+
 }

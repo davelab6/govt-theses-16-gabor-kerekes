@@ -34,6 +34,6 @@ In a [discussion](http://mthvn.tumblr.com/post/38098461078/thecloudthestateandth
 
 > Right now the geopolitics of the Cloud are defined by a clash between State and non-State organizations [...] with decentralized networks in between. In the coming years, the geopolitics of the Cloud will be defined by the tension and conversion of States and Clouds into one another: States becoming Cloud-based platforms, and Cloud-based platforms taking on more and more practical forms of sovereignty—identity, geography, mobility. So a Cloud Polis, we might imagine, would represent other weird kinds of “sovereign” software/State platforms that are probably not bound to specific spots of territory in the same way as the Westphalian nation-state was. They might be more effective and democratic, or more totalitarian, more or less elective than the models we have now.
 
-### conclusion{.core-statement .agency}
+<!-- ### conclusion{.core-statement .agency} -->
 As graphic design is on a mission to become an autonomous discipline, and as its practitioners continue to seek social and political agency, it is necessary for the field to develop a branch that is literate in the language of future politics: code.
 As social processes have become indissociable from computational processes, it is imperative for the understanding of contemporary society to be able to read, write and critique code. Today's problems can only be sufficiently represented through today's medium: software.
