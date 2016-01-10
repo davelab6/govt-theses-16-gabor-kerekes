@@ -1,12 +1,19 @@
 
-###Decentralization {.core-statement .decentralization}
-It can be argued that the historical trajectory of the modern western world is that of a movement towards an increasingly decentralized society. Although this progression was not without regressions and relapses, in the long-run we have moved from the feudal society based on centralized power to modern democracies based on a more distributed power. That is not to say that centralized powers are absent from today's society [@networkglobalcorporate_vitali_2011], but overall, we do live in a more decentralized world. This process happened in leaps of technological and social development, that were set in motion by information revolutions.
 
-#Movable Type
+-movable type
+    -gutenberg galaxy
+-internet
+    -network society
+-block-chain
+    -decentralization
+
+
+
+#Information revolutions
 One such information revolution was induced by Johannes Gutenberg's invention of the printing press.
 
 Until the invention of printing, knowledge could only be reproduced through the expensive and time-consuming way of copying manuscripts by hand. Book production was the monopoly of the Catholic Church which exercised total control over the types of information that could be circulated. Furthermore, literacy was the privilege of the elite and the Church's monopoly over information secured their power over the illiterate majority.
-The invention of the printing technology had far reaching implications. By enabling the fast and cheap reproduction of information, alternative political views could now be effectively disseminated. Print provided the ground for the practice of public discourse and the distribution of knowledge. In the short term this gave way to the Protestant Reformation, on the long term, it lead to the rise of market economies, the philosophical movement of the Enlightenment, the scientific and industrial revolution and the rise of nation states.
+The invention of printing technology had far reaching implications. By enabling the fast and cheap reproduction of information, alternative political views could now be effectively disseminated. Print provided the ground for the practice of public discourse and the distribution of knowledge. In the short term this gave way to the Protestant Reformation, on the long term, it lead to the rise of market economies, the philosophical movement of the Enlightenment, the scientific and industrial revolution and the rise of nation states.
 
 How could a technical innovation induce such a far reaching process of social change? Did it create this change or did it facilitate latent social forces? According to Marshall McLuhan *"[...]with the Gutenberg technology we move into the age of the take-off of the machine. The principle of segmentation of actions and functions and roles became systematically applicable wherever desired"* [@gutenberggalaxymaking_mcluhan_2011, 276]
 

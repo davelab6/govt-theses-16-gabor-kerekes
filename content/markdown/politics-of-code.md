@@ -1,8 +1,6 @@
 
 
 
-###Decentralization {.core-statement .decentralization}
-It can be argued that the historical trajectory of the modern western world is that of a movement towards an increasingly decentralized society. Although this progression was not without regressions and relapses, in the long-run we have moved from the feudal society based on centralized power to modern democracies based on a more distributed power. That is not to say that centralized powers are absent from today's society [@networkglobalcorporate_vitali_2011], but overall, we do live in a more decentralized world. This process evolved in leaps of technological and social development, that were set in motion by information revolutions.
 
 #Block-chain
 In October 2008, a person with the pseudonym Satoshi Nakamoto released a paper titled "*Bitcoin: A Peer-to-Peer Electronic Cash System*"[@bitcoinpeertopeerelectronic_nakamoto_2008]. Combining existing peer-to-peer technologies, cryptographic techniques, he outlined a protocol for a decentralized cryptocurrency which he named Bitcoin. Bitcoin is based on a distributed database or ledger called the block chain.  Transactions on the block chain can be sent anonymously in a peer-to-peer fashion, without the use of intermediaries such as banks, funds or credit card and insurance companies. The identity of Nakamoto has not been yet uncovered, but his invention is continuing to gain widespread adoption.
