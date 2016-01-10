@@ -1,4 +1,5 @@
-###Abstract
+
+#Abstract
 
 
 A new paradigm has started to emerge in the field of graphic design; a transformation of the set of techniques, values and methods that characterize its practice has been set in motion.

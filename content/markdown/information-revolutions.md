@@ -1,16 +1,9 @@
 
 
--movable type
-    -gutenberg galaxy
--internet
-    -network society
--block-chain
-    -decentralization
-
-
 
 #Information revolutions
-One such information revolution was induced by Johannes Gutenberg's invention of the printing press.
+Throughout history, forms of social organization were always tightly related to the ways in which information was produced, distributed and consumed.
+Johannes Gutenberg's invention of the printing press in the 15th century had unleashed a historical process that brought with it revolutions in political and scientific thinking and eventually, a radically different social order.
 
 Until the invention of printing, knowledge could only be reproduced through the expensive and time-consuming way of copying manuscripts by hand. Book production was the monopoly of the Catholic Church which exercised total control over the types of information that could be circulated. Furthermore, literacy was the privilege of the elite and the Church's monopoly over information secured their power over the illiterate majority.
 The invention of printing technology had far reaching implications. By enabling the fast and cheap reproduction of information, alternative political views could now be effectively disseminated. Print provided the ground for the practice of public discourse and the distribution of knowledge. In the short term this gave way to the Protestant Reformation, on the long term, it lead to the rise of market economies, the philosophical movement of the Enlightenment, the scientific and industrial revolution and the rise of nation states.

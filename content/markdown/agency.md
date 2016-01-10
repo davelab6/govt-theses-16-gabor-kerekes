@@ -1,5 +1,5 @@
 
-##Agency
+#Agency
 
 Designer as author, citizen, cultural critic, activist. Moving away from the notion of design as commercial service, current thinking on design is trending towards defining the role of the designer as an independent social agent, who brings critical issues of contemporary society into view. The designer is not waiting anymore for the phone call or e-mail of a potential commissioner, s/he takes an active role in both the initiation and production of projects. And projects, that are not aimed at the manufacture of desires for the latest consumer products, but at amplifying positive social forces that are in line with the designer's own values. These relatively new ideas about the designer's identity can be traced back to the 1980's, when the field of design was disrupted both by the proliferation of post-modernist thought and the introduction of the personal computer as the primary design tool.  
 
