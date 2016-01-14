@@ -1,0 +1,65 @@
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    overflow: hidden;
+
+}
+
+svg {
+    font: 12px sans-serif;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-family: "Aileron";
+}
+
+text {
+    pointer-events: none;
+}
+
+.inner_node rect {
+    pointer-events: all;
+    fill: white;
+}
+
+.inner_node text{
+    font-size: 1.2em;
+}
+
+.inner_node rect.highlight {
+    stroke: orangered;
+    stroke-width: 5px;
+}
+
+.outer_node circle {
+    fill: #fff;
+    stroke-width: 1.5px;
+    pointer-events: all;
+}
+
+.outer_node {
+    fill: white;
+}
+
+.outer_node text{
+    font-size: 1.1em;
+}
+
+.outer_node circle.highlight
+{
+    stroke: orange;
+    stroke-width: 6px;
+}
+
+.link {
+    fill: none;
+}
+
+

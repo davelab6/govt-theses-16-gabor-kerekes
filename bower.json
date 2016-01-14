@@ -11,6 +11,7 @@
   "private": true,
   "dependencies": {
     "jquery": "~2.1.4",
-    "less": "~2.5.3"
+    "less": "~2.5.3",
+    "d3": "~3.5.12"
   }
 }

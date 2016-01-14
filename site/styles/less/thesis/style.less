@@ -1,8 +1,26 @@
 
 
-@import "fonts.less";
+@import "../../fonts.less";
 
 html{
+    background-color: black;
+    color: snow;
+}
+
+@font-face {
+    font-family: 'Aileron Regular';
+    src:  url('../../../fonts/aileron/Aileron-Regular.otf')
+}
+
+
+@font-face {
+    font-family: 'Aileron Italic';
+    src:  url('../../../fonts/aileron/Aileron-Italic.otf')
+}
+
+@font-face {
+    font-family: 'Aileron Bold';
+    src:  url('../../../fonts/aileron/Aileron-Bold.otf')
 }
 
 #wrapper{
@@ -10,13 +28,15 @@ html{
     font-family: "Aileron Regular";
 }
 
+
 .article{
     font-size: 1.4em;
     display: block;
     margin: auto;
     width: 70vw;
-    background-color: ghostwhite;
+    background-color: rgb(15, 15, 15);
     padding: 30px;
+    padding-left: 70px;
     margin: 20px;
     float: left;
     p, .references{
@@ -26,7 +46,7 @@ html{
 
 a{
     text-decoration: none;
-    color: green;
+    color: orangered;
 }
 
 section{
@@ -34,7 +54,7 @@ section{
 }
 
 #abstract{
-    background-color: whitesmoke;
+    background-color: rgb(25, 25, 25);
 }
 
 .references{

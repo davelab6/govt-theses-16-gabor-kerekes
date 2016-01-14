@@ -2,7 +2,7 @@
 #Abstract
 
 
-A new paradigm has started to emerge in the field of graphic design; a transformation of the set of techniques, values and methods that characterize its practice has been set in motion.
+<spanc>A new paradigm has started to emerge in the field of graphic design; a transformation of the set of techniques, values and methods that characterize its practice has been set in motion.
 
 Traditionally, the practice of a graphic designer revolved around the formal arrangement of graphic elements into artifacts that mediated messages of commissioners. The three key aspects characterizing the profession have been 1) its position as a *service* within a *client/designer* relationship, 2) that it has been predominantly occupied with the *development of form*, and 3) that the products of the design process have been *specific artifacts*. In recent years, new models of practices have started to emerge within the field, seriously challenging these three aspects that once defined the role and identity of the graphic designer.
 
