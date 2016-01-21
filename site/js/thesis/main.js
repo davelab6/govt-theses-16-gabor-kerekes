@@ -24,17 +24,72 @@ window.onload = function(){
                 onContentLoaded();
             }
         });
-
-
     });
 };
 
 
 function onContentLoaded(){
+    addHeaderToReferences();
+    var taggedElements = collectTaggedElements();
+    taggedElements.each(function(index){
+        $(this).attr('data-snippet-id', index);
+    });
+    var topics = collectTopics(taggedElements);
+    var snippets = collectSnippets(topics);
+    console.log(snippets);
+
+}
+
+
+
+function collectSnippets(topics){
+    var snippets = {};
+    topics.forEach(function(topic){
+       snippets[topic] = [];
+        $('.'+topic).each(function(){
+            snippets[topic].push(
+
+                {   text: $(this).text(),
+                    id: $(this).data('snippet-id')
+                }
+            );
+        });
+    });
+
+    return snippets;
+}
+
+function collectTaggedElements(){
+    return $('p').find('span').filter(function(){
+
+        if($(this).attr('class')){
+            var classes = $(this).attr('class').split(" ");
+            return classes.indexOf('citation') === -1 && classes.indexOf('conclusion') == -1;
+        }
+
+        return false;
+
+    });
+}
+
+function collectTopics(elements){
+
+    var topics = [];
+
+    elements.each(function(){
+        $(this).attr('class').split(" ").forEach(function(topic){
+            if(topics.indexOf(topic) == -1){
+                topics.push(topic);
+            }
+        });
+    });
+    return topics;
+}
+
+function addHeaderToReferences(){
     $('.references').each(function(){
         if($(this).children().length > 0){
             $(this).prepend( $('<h3>').text('References') );
         }
     });
-
 }

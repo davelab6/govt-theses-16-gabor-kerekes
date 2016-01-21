@@ -1,0 +1,116 @@
+
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+
+#map{
+    width: 100%;
+    height: 100%;
+    //position: fixed;
+    margin: 0;
+    padding: 0;
+}
+
+#cover{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    //display: none;
+    z-index: 9999;
+}
+
+
+svg {
+    font: 12px sans-serif;
+    position: relative;
+    //left: 50%;
+    //top: 50%;
+    -webkit-transform: translate(0%, -5%);
+    -ms-transform: translate(0%, -5%);
+    transform: translate(0%, -5);
+    font-family: "Aileron";
+}
+
+text {
+    pointer-events: none;
+}
+
+.inner_node rect {
+    pointer-events: all;
+    fill: white;
+}
+
+.inner_node text{
+    font-size: 1.2em;
+}
+
+.inner_node rect.highlight {
+    stroke: orangered;
+    stroke-width: 5px;
+}
+
+.outer_node circle {
+    fill: #fff;
+    stroke-width: 1.5px;
+    pointer-events: all;
+}
+
+.outer_node {
+    fill: white;
+    cursor: pointer;
+}
+
+.outer_node text{
+    font-size: 1.1em;
+}
+
+.outer_node circle.highlight
+{
+    stroke: orange;
+    stroke-width: 6px;
+}
+
+.link {
+    fill: none;
+}
+
+
+#snippet-list-container{
+    width: 30vw;
+    height: 100%;
+    background-color: rgb(25, 25, 25);
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 30px;
+    padding-top: 50px;
+    overflow-y: scroll;
+}
+
+.snippet{
+    margin-bottom: 30px;
+    font-size: 12px;
+    width: 60%;
+    cursor: pointer;
+
+    .snippet-title{
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    &:hover{
+        color: orangered;
+    }
+}
+
+
+
+

@@ -9,11 +9,26 @@
 	<meta property="og:description" content="Design & Technology"/>
 	<meta property="og:author" content="Gabor Kerekes" />
 	<title>Thesis Concept Map</title>
-    <link rel="stylesheet" type="text/less" href="site/styles/less/index/style.less">
+    <link rel="stylesheet" type="text/less" href="site/styles/less/map.less">
+    <link rel="stylesheet" type="text/less" href="site/styles/less/snippets.less">
+    <link rel="stylesheet" type="text/less" href="site/styles/less/thesis.less">
     <link rel="stylesheet" type="text/less" href="site/styles/fonts.less">
 </head>
 <body>
+    <div id="cover">
+        <div id="map">
+        </div>
+        <div id="snippet-list-container"></div>
+    </div>
+    <div id="thesis-wrapper">
+        <div id="nav">
+            <div id="chapters-nav"></div>
+            <a id="show-map" class="nav-item">Show Map</a>
+        </div>
+    </div>
 	<script src="bower_components/d3/d3.min.js"></script>
 	<script src="bower_components/less/dist/less.min.js"></script>
-	<script type="text/javascript" rel="script"  src="site/js/index/script.js"></script>
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" rel="script"  src="site/js/map/Map.js"></script>
+	<script type="text/javascript" rel="script"  src="site/js/main.js"></script>
 </body>
