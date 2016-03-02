@@ -6,6 +6,7 @@
 
 $(function(){
    loadThesis('#thesis-wrapper');
+
 });
 
 
@@ -38,6 +39,30 @@ var loadThesis = function(container){
 
 var snippets;
 function onContentLoaded(){
+
+    var url =  window.location.href.split("/");
+    url.pop();
+    url = url.join("/");
+    console.log( url);
+
+
+    var resources = [];
+
+    window.performance.getEntries().forEach(function(entry, i){
+        console.log();
+        resources.push(
+            $('<div>')  .text(entry.name.replace(url, ""))
+                        .addClass('resource')
+                        .css('top', i*40)
+                        .css('display', 'none')
+                        .appendTo('#cover')
+                        .delay(i*100).fadeIn(200).fadeOut(500)
+        );
+    });
+
+
+
+
     addHeaderToReferences();
     var taggedElements = collectTaggedElements();
     taggedElements.each(function(index){
@@ -45,9 +70,18 @@ function onContentLoaded(){
     });
     var topics = collectTopics(taggedElements);
     snippets = collectSnippets(topics);
+
+    var topics = [];
+    Object.keys(snippets).forEach(function(key){
+        topics.push(key + " (" + snippets[key].length + ")");
+    });
+
+    topics.sort();
+    //topics.forEach(function(topic){ console.log(topic)  });
+
     var titles = collectTitles();
     var mapContent = createMapContent(titles, snippets);
-    ThesisMap('#map', mapContent).create();
+    //ThesisMap('#map', mapContent).create();
     attachEventListeners();
 }
 
@@ -93,7 +127,7 @@ function showCover(){
 }
 
 function showSnippets(snippets){
-    console.log(snippets);
+    //console.log(snippets);
     snippets.forEach(function(snippet){
         var snippetContainer = $('<div>').addClass('snippet').attr('data-snippet-id', snippet['id']);
         $('<div>').text(snippet['parent-title']).addClass('snippet-title').appendTo(snippetContainer);
