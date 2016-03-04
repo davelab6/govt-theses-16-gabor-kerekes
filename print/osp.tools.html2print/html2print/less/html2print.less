@@ -1,0 +1,194 @@
+/**
+ * Computation
+ */
+
+@import "../../style/setup.less";
+
+/* EXTRA SPACE AROUND THE PAGE: BLEED + CROP */
+// TODO: find a more appropriate name
+@crop: @crop-size + @bleed; 
+
+/* GEOMETRY OF THE PAGE */
+@page-width: @paper-width - (@crop*2);
+@page-height: @paper-height - (@crop*2);
+
+@content-area-width: @page-width - @page-margin-outside - @page-margin-inside;
+@content-area-height: @page-height - @page-margin-top  - @page-margin-bottom;
+
+
+
+/* SIZE OF SPREAD */
+@spread: @page-width * 2;
+
+
+
+/**
+ * DEFINITION OF THE PAPER SHEET
+ */
+@page {
+    size: @paper-width (@paper-height + 1); 
+    margin: 0;
+}
+
+
+/**
+ * CANVAS
+ */
+
+@media all {
+    body {
+        margin: 0;
+    }
+
+    // hide master-pages
+    [id*='master-page'] {
+        display: none;;
+    }
+
+
+    .paper {
+        width: @paper-width; 
+        height: @paper-height;
+        box-sizing: border-box;
+
+        counter-increment: page-counter;
+
+        // To make sure that one paper sheet is not splitted into different pages in the PDF
+        page-break-inside: avoid;
+        page-break-after: always;
+        overflow: hidden;
+
+        /* Crop marks */
+        padding: @crop;
+        position: relative;
+        .crops {
+            width: @paper-width; 
+            height: @paper-height;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            div {
+                border-style: solid;
+                border-color: black;
+                border-width: 0;
+                width: @crop;
+                height: @crop;
+                position: absolute;
+                box-sizing: border-box;
+
+                span {
+                    width: @bleed;
+                    height: @bleed;
+                    background-color: white;
+                    position: absolute;
+                }
+            }
+            .crop-top-left {
+                border-right-width: 1px;
+                border-bottom-width: 1px;
+                top: 0;
+                left: 0;
+
+                span { right: -1px; bottom: -1px;}
+            }
+            .crop-top-right {
+                border-left-width: 1px;
+                border-bottom-width: 1px;
+                top: 0;
+                right: 0;
+
+                span { left: -1px; bottom: -1px;}
+            }
+            .crop-bottom-right {
+                border-left-width: 1px;
+                border-top-width: 1px;
+                right: 0;
+                bottom: 0;
+
+                span { left: -1px; top: -1px;}
+            }
+            .crop-bottom-left {
+                border-right-width: 1px;
+                border-top-width: 1px;
+                left: 0;
+                bottom: 0;
+
+                span { right: -1px; top: -1px;}
+            }
+        }
+    }
+
+    .page {
+        width: @page-width;
+        height: @page-height;
+        position: relative;
+
+
+        .content-area {
+            width: @content-area-width;
+            height: @content-area-height;
+            margin-top: @page-margin-top;
+            margin-bottom: @page-margin-bottom;
+            display: inline-block;
+            overflow: hidden;
+
+
+            .content-body {
+                height: @content-area-height - @header-height - @footer-height
+                //- 25mm
+            ;
+                float: left;
+                width: @content-area-width;
+            }
+        }
+    }
+
+    // TODO: changer le format du papier en spread pour pouvoir imprimer en planche
+    .spread {
+        .paper {
+            float: left;
+        }
+        .paper:nth-child(odd) {
+            margin-left: -@crop;
+        }
+        .paper:nth-child(even) {
+            margin-right: -@crop;
+        }
+        .paper:first-child {
+            margin-left: @page-width;
+        }
+    }
+}
+
+@media print {
+    html {
+        width: @paper-width;
+        height: @paper-height;
+    }
+
+    body {
+        /* Allows printing of background colors */
+        background-color: white;
+        -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+        /* Activate opentype features and kernings */
+        -webkit-font-feature-settings: "liga", "dlig", "clig", "kern";
+        text-rendering: optimizeLegibility;
+    }
+}
+
+
+
+/**
+ * Helpers
+ */
+
+.region-break {
+    /* Apply this class to an element to put it on a new region.
+     * Hint: 
+     * You can also use an empty <div class="page-break"></div> 
+     * if you want to put manual page breaks without attaching it to an HTML element
+     */
+    -webkit-region-break-before: always;
+}

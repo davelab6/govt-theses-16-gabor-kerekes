@@ -1,10 +1,7 @@
 !bower_components
 .editor-settings
-checklist
-outlines
-etc/
-core-statements.md
-site/content/icml/
-site/content/pdf/
-comments.txt
-comments/
+
+content/etc/
+content/icml/
+content/pdf/
+content/comments/

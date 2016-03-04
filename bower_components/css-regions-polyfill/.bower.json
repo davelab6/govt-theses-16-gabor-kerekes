@@ -1,0 +1,14 @@
+{
+  "name": "css-regions-polyfill",
+  "homepage": "https://github.com/FremyCompany/css-regions-polyfill",
+  "_release": "a7461d7024",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a7461d70247d92a884d22553e74d9afae4eeea8d"
+  },
+  "_source": "https://github.com/FremyCompany/css-regions-polyfill.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/FremyCompany/css-regions-polyfill.git",
+  "_direct": true
+}

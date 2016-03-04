@@ -1,34 +1,80 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="utf-8">
-	<meta name="name" content="Concept Map" />
+	<meta name="name" content="From Text to Process" />
 	<meta name="mintags" content="2" />
 	<meta name="maxtags" content="2" />
-	<meta name="description" content="Design & Technology"/>
-	<meta property="og:title" content="Graphic Design 3.0" />
-	<meta property="og:description" content="Design & Technology"/>
-	<meta property="og:author" content="Gabor Kerekes" />
-	<title>Thesis Concept Map</title>
-    <link rel="stylesheet" type="text/less" href="site/styles/less/map.less">
-    <link rel="stylesheet" type="text/less" href="site/styles/less/snippets.less">
-    <link rel="stylesheet" type="text/less" href="site/styles/less/thesis.less">
-    <link rel="stylesheet" type="text/less" href="site/styles/fonts.less">
+	<meta name="description" content="In what specific ways does software frame culture, and how can graphic design use this to its own advantage?"/>
+	<meta property="og:title" content="From Text to Process" />
+	<meta property="og:description" content="In what specific ways does software frame culture, and how can graphic design use this to its own advantage?"/>
+	<meta property="og:author" content="Gábor Kerekes" />
+	<title>From Text to Process</title>
+    <link rel="stylesheet" type="text/css" href="bower_components/css-reset/reset.css">
+    <link rel="stylesheet" type="text/less" href="less/style.less">
 </head>
 <body>
-    <div id="cover">
-        <div id="map">
+    <header>
+        <nav>
+            <a id="index-nav" class="hidden">Index</a>
+            <a id="title-nav">From Text To Process</a>
+            <a id="print-nav" class="hidden">Print</a>
+            <a id="colophon-nav" class="hidden">Colophon</a>
+        </nav>
+    </header>
+
+    <div id="index" class="hidden">
+        <div id="index-tags-wrapper" class="active">
+            <aside><nav>Topics</nav></aside>
+            <div id="index-tags" class="index-section">
+                <div id="index-tags-selection"></div>
+                <div id="index-tags-selected"></div>
+
+                <div id="index-tag-control">
+                    <nav id="index-reset">Reset</nav>
+                </div>
+            </div>
+
         </div>
-        <div id="snippet-list-container"></div>
-    </div>
-    <div id="thesis-wrapper">
-        <div id="nav">
-            <div id="chapters-nav"></div>
-            <a id="show-map" class="nav-item">Show Map</a>
+        <div id="index-snippets-wrapper" class="rel">
+            <aside><nav>Snippets</nav></aside>
+            <div id="index-snippets-preview"></div>
+            <div id="index-snippets" class="index-section">
+
+            </div>
         </div>
     </div>
-	<script src="bower_components/d3/d3.min.js"></script>
+
+    <div class="text-wrapper">
+        <section class="maintitle">
+            <div><span id="fromtext">From Text</span> <br><span id="toprocess">to Process</span></div>
+            <div>
+                Bachelor Graphic Design Thesis by Gábor Kerekes<br>
+                Royal Academy of Art, The Hague, 2016
+            </div>
+        </section>
+        <section class="table-of-contents">
+            <h1 class="toc-header">Table of Contents</h1>
+            <ol id="toc-list">
+                <li>Abstract</li>
+                <li>1. Introduction – The World as Text</li>
+                <li>2. Literacy and power</li>
+                <li>3. Designer as agent<li/>
+                <li>4. Code is law</li>
+                <li>5. Interfaces</li>
+                <li>6. The World as Process</li>
+                <li>Conclusion</li>
+            </ol>
+        </section>
+		<div class="content">
+
+		</div>
+    </div>
+
+    <div id="map" class="text-wrapper">
+
+    </div>
+
 	<script src="bower_components/less/dist/less.min.js"></script>
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-	<script type="text/javascript" rel="script"  src="site/js/map/Map.js"></script>
-	<script type="text/javascript" rel="script"  src="site/js/main.js"></script>
+    <script type="text/javascript" rel="script"  src="js/main.js"></script>
 </body>
