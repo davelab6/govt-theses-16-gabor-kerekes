@@ -1,0 +1,566 @@
+
+
+@import "fonts";
+
+@header-height: 7vh;
+@background: ghostwhite;
+@foreground: black;
+@link-color: orangered;
+
+html{
+    background-color: @background;
+    color: @foreground;
+    font-family: 'CharisSILW';
+}
+
+nav{
+    font-family: "Clear Sans";
+    text-transform: uppercase;
+    font-size: 0.85em;
+    z-index: 999;
+}
+
+body{
+    a{
+        color: @link-color;
+        cursor: pointer;
+    }
+
+    em{
+        font-style: italic;
+    }
+
+    overflow-x: hidden;
+
+}
+
+
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @header-height;
+    top: 0;
+    left: 0;
+    background-color: @background;
+    font-size: 2em;
+    font-weight: bold;
+    width: 100%;
+    position: fixed;
+    text-align: center;
+    z-index: 999;
+
+    &.dark{
+        background-color: black;
+    }
+
+
+    a{
+        padding-left: 10px;
+        padding-right: 10px;
+
+        &.hidden{
+            display: none;
+        }
+
+        &:hover{
+            color: cyan;
+        }
+    }
+
+
+}
+
+
+#index{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    margin-top: @header-height;
+    top: 0;
+    left:0;
+    display: none;
+
+
+    color: @background;
+    background-color: @foreground;
+
+    nav:hover{
+        color: orangered;
+    }
+
+    .index-section{
+        width: 100%;
+        height: 100%;
+    }
+
+    aside{
+        width: 5vw;
+        position: absolute;
+        color: @link-color;
+        height: inherit;
+        font-family: "Fira Mono";
+
+        nav{
+
+            -webkit-transform:  translate(0, -50%) rotate(-90deg);
+            -moz-transform:     translate(0, -50%) rotate(-90deg);
+            -ms-transform:      translate(0, -50%) rotate(-90deg);
+            -o-transform:       translate(0, -50%) rotate(-90deg);
+            transform:          translate(0, -50%) rotate(-90deg);
+
+            position: relative;
+            top: 50%;
+            text-align: center;
+        }
+    }
+
+    #index-tags-wrapper{
+        height: 70vh;
+        background-color: black;
+        color: white;
+
+        &.highlight{
+            background-color: @link-color;
+            color: black;
+            cursor: pointer;
+            nav{
+                color: black;
+            }
+        }
+
+    }
+
+
+    #index-tags{
+        font-size: 2em;
+        line-height: 1.2em;
+        font-family: "Fira Mono";
+        font-weight: 900;
+        display: flex;
+
+
+        #index-tag-control{
+            cursor: pointer;
+            color: @link-color;
+            position: absolute;
+            right: 50%;
+
+            -webkit-transform:  translate(50%, 0);
+            -moz-transform: translate(50%, 0);
+            -ms-transform:  translate(50%, 0);
+            -o-transform:   translate(50%, 0);
+            transform:  translate(50%, 0);
+
+            top: 58vh;
+            display: flex;
+            z-index: 99;
+            text-decoration: underline;
+
+            nav{
+                display: inline-flex;
+                font-size: 0.45em !important;
+                margin-left: 10px;
+                margin-right: 10px;
+                font-weight: normal;
+            }
+        }
+
+
+        #index-tags-selected, #index-tags-selection{
+            display: flex;
+        }
+
+
+        #index-tags-selection{
+            padding-left: 5vw;
+            height: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+
+            .tagColumn{
+                padding-top: 5vh;
+                flex: 0 0 auto;
+                padding-right: 100px;
+            }
+        }
+
+        #index-tags-selected{
+            align-items: center;
+            font-size: 0.8em;
+            margin: auto;
+            display: none;
+            span{
+                padding-right: 10px;
+                padding-left: 10px;
+
+                &::after{
+                    content: ",";
+                }
+
+                &:last-child::after{
+                    content: "";
+                }
+            }
+        }
+
+
+
+        .tag{
+            opacity: 0.2;
+            cursor: default;
+            color: rgb(180, 180, 180);
+            &.selectable{
+                opacity: 1;
+                cursor: pointer;
+                &:hover{
+                    color: @link-color;
+                }
+            }
+
+            &.selected{
+                color: cyan;
+            }
+        }
+
+    }
+
+
+    #index-snippets-wrapper{
+        background-color: @foreground;
+        height: 73vh;
+        width: 101.1%;
+        font-family: "Charis SIL";
+        &.rel{
+            position: relative;
+            top: -15px;
+        }
+
+        &.highlight{
+            background-color: @link-color;
+            color: black;
+            cursor: pointer;
+        }
+    }
+
+    #index-snippets-preview{
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        padding-top: 10vh;
+        font-size: 3em;
+        font-weight: bold;
+        text-decoration: underline;
+
+
+        &.hidden{
+            display: none;
+        }
+    }
+
+
+
+    #index-snippets{
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+
+        padding-top: 10vh;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+
+        &.hidden{
+            display: none;
+        }
+
+        .snippet-container{
+
+            width: 50vw;
+            font-size: 2em;
+            line-height: 1.2em;
+            padding-bottom: 10vh;
+
+            .snippet-index{
+                text-align: center;
+                font-size: 1.4em;
+                font-family: "Fira Mono";
+                font-weight: 900;
+                margin-bottom: 2vh;
+            }
+        }
+
+    }
+}
+
+
+@media all {
+
+
+#text-wrapper {
+    margin-top: @header-height;
+    .maintitle{
+        position: relative;
+        top: 10vh;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 999999999;
+        width: 100vw;
+        height: 100vh;
+        color: @foreground;
+        padding-left: 100px;
+        font-weight: bold;
+        #toprocess{
+            font-family: "Fira Code";
+            font-style: italic;
+            font-weight: 900;
+        }
+
+        div:first-child{
+            font-size: 14vw;
+        }
+
+        div:nth-child(2){
+            font-size: 3vw;
+        }
+    }
+
+    .table-of-contents{
+
+        border-bottom: 2px solid black;
+        border-top: 2px solid black;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        font-size: 1.7em;
+        padding-bottom: 20vh;
+        padding-top: 10vh;
+
+        #toc-list{
+            font-size: 2em;
+            line-height: 1.5em;
+            li{
+                border-bottom: 1px solid black;
+            }
+        }
+
+        h1{
+            font-size: 5em;
+            font-weight:bold;
+            padding-bottom: 6vh;
+        }
+
+    }
+
+
+    #content{
+        font-size: 1.7em;
+        line-height: 1.25em;
+        padding-top: 10vh;
+
+
+
+        .chapter-heading-wrapper{
+            font-weight: bold;
+            font-size: 5em;
+            line-height: 1em;
+            padding-bottom: 15vh;
+            padding-left: 3vw;
+            padding-right: 3vw;
+            .chapter-number{
+                text-align: center;
+                padding-bottom: 5vh;
+            }
+        }
+
+        h2{
+            font-size: 1.5em;
+            padding-bottom: 3vh;
+        }
+
+        h1, h2{
+            text-transform: uppercase;
+            text-align: center;
+            //margin-bottom: 20px;
+        }
+
+        p, blockquote{
+            margin: auto;
+        }
+
+
+        p{
+            width: 58%;
+            text-indent: 5%;
+
+            &:first-of-type{
+                text-indent: 0;
+            }
+
+        }
+
+        blockquote{
+            font-size: 1.5em;
+            font-weight: bold;
+            font-style: italic;
+            width: 70%;
+            line-height: 1.2em;
+
+            p{
+                text-indent: 0;
+                width: 100%;
+                margin: 0;
+                padding-top: 10vh;
+                padding-bottom: 10vh;
+            }
+
+            ol{
+                width: 90%;
+                list-style: decimal;
+                padding: 0;
+                margin-top: 5vh;
+                margin-bottom: 5vh;
+                padding-left: 7%;
+            }
+        }
+
+        section{
+            margin-bottom: 35vh;
+        }
+
+        .references{
+            font-family: "Fira Mono";
+            font-size: 0.5em;
+            line-height: normal;
+            width: 40%;
+            margin-left: 27vw;
+            margin-top: 5%;
+
+            &::before{
+                content: "References";
+                display: block;
+                margin-bottom: 5%;
+                font-size: 1.2em;
+                text-transform: uppercase;
+                font-weight: 900;
+            }
+
+            li{
+                list-style: decimal !important;
+            }
+
+        }
+
+
+        sup{
+            color: @link-color;
+            font-size: 0.6em;
+            vertical-align: baseline;
+            position: relative;
+            top: -0.4em;
+        }
+
+
+        .image-container{
+            margin: auto;
+            width: 100%;
+            height: auto;
+            float: left;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+            margin: 0;
+
+            img{
+                width:100%;
+                max-width:100vw;
+            }
+        }
+
+
+        #NationState{
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding-top: 20vh;
+            padding-bottom: 20vh;
+            img{
+                padding-bottom: 0;
+                //transform: scale(0.6, 0.6);
+                width: 50%;
+                height: 50%;
+                margin: 0;
+            }
+        }
+
+        iframe{
+            width: 100%;
+            height: 720px;
+            padding-top: 5vh;
+            padding-bottom: 5vh;
+        }
+    }
+}
+}
+
+
+#map{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+//@media print {
+//
+//    @page {
+//        margin: 5mm;
+//        width: 20mm;
+//        height: 256mm;
+//    }
+//
+//
+//    .text-wrapper {
+//        header {
+//            display: none;
+//        }
+//
+//        h1 {
+//            font-size: 10pt;
+//            page-break-before: always;
+//        }
+//
+//        p {
+//            font-size: 11pt;
+//        }
+//
+//        figure {
+//            display: block;
+//            width: 100%;
+//        }
+//        img {
+//            display: block;
+//            width: 100%;
+//        }
+//    }
+//}
+
+
+
+.printframe{
+    //display: none;
+    width: 100vw;
+    height: 3000px;
+}
+
+
+
+
+
+
+

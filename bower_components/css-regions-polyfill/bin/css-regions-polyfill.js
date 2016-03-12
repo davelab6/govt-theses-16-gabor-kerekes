@@ -2316,7 +2316,7 @@ module.exports = (function(window, document) { "use strict";
 				
 			}
 			
-			if(numberOfIDs>255) numberOfIds=255;
+			if(numberOfIDs>255) numberOfIDs=255;
 			if(numberOfClasses>255) numberOfClasses=255;
 			if(numberOfTags>255) numberOfTags=255;
 			
@@ -5266,6 +5266,7 @@ module.exports = (function(window, document, cssRegions) { "use strict";
 
 	// load the polyfill immediately if not especially told otherwise
 	if(!("cssRegionsManualTrigger" in window)) { cssRegions.enablePolyfill(); }
+	window.cssRegions = cssRegions;
 	
 });
 require.define('src/css-regions/lib/objectmodel.js');
@@ -6229,7 +6230,6 @@ module.exports = (function(window, document) { "use strict";
 						flows[i].relayout();
 					}
 				}
-				
 			}
 			window.addEventListener("resize",
 				function() {
@@ -6269,7 +6269,6 @@ module.exports = (function(window, document) { "use strict";
 	};
 	
 	enableObjectModel(window, document, cssRegions);
-	
 	return cssRegions;
 })(window, document);
 require.define('src/css-regions/polyfill.js');

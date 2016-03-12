@@ -11,11 +11,12 @@
     <meta property="og:image" content="http://kabk.github.io/govt-theses-16-gabor-kerekes/content/imgs/gui.jpg">
     <title>From Text to Process</title>
     <link rel="stylesheet" type="text/css" href="bower_components/css-reset/reset.css">
-    <link rel="stylesheet" type="text/less" href="less/style.less">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/print.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="print-exclude">
             <a id="index-nav" class="hidden">Index</a>
             <a id="title-nav">From Text To Process</a>
             <a id="print-nav" class="hidden">Print</a>
@@ -23,7 +24,7 @@
         </nav>
     </header>
 
-    <div id="index" class="hidden">
+    <div id="index" class="hidden print-exclude">
         <div id="index-tags-wrapper" class="active">
             <aside><nav>Topics</nav></aside>
             <div id="index-tags" class="index-section">
@@ -56,17 +57,17 @@
         <section class="table-of-contents">
             <h1 class="toc-header">Table of Contents</h1>
             <ol id="toc-list">
-                <li>Abstract</li>
+                <li>0. Abstract</li>
                 <li>1. Introduction – The World as Text</li>
                 <li>2. Literacy and power</li>
-                <li>3. Designer as agent<li/>
+                <li>3. Designer as agent</li>
                 <li>4. Code is law</li>
                 <li>5. Interfaces</li>
                 <li>6. The World as Process</li>
-                <li>Conclusion</li>
+                <li>7. Conclusion</li>
             </ol>
         </section>
-		<div class="content">
+		<div id="content">
 
 		</div>
     </div>
@@ -74,8 +75,6 @@
     <div id="map" class="text-wrapper">
 
     </div>
-
-	<script src="bower_components/less/dist/less.min.js"></script>
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
     <script type="text/javascript" rel="script"  src="js/main.js"></script>
 </body>

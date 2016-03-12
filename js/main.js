@@ -26,7 +26,15 @@ $(function(){
 
         jqxhr.done(function(){
             htmlcontent.forEach(function(content){
-                $('.content').append(content);
+                var c = $(content);
+                //fix image sources
+                c.find('img').each(function(){
+                    var src = $(this).attr('src');
+                    var splitSrc = src.split("/");
+                    var fname = splitSrc[splitSrc.length-1];
+                    $(this).attr('src', 'content/imgs/'+fname);
+                });
+                $('#content').append(c);
             });
         });
 
@@ -43,7 +51,7 @@ $(function(){
 
         var tagCounts = {};
 
-        $('.content').find('span').each(function(){
+        $('#content').find('span').each(function(){
 
             var span = $(this);
 
@@ -266,24 +274,76 @@ $(function(){
         });
     }
 
-    function fixImageSources(){
-        $('img').each(function(){
-           var src = $(this).attr('src');
-            var splitSrc = src.split("/");
-            var fname = splitSrc[splitSrc.length-1];
-            $(this).attr('src', 'content/imgs/'+fname);
+    function fixReferences(){
+        $('.references').each(function(){
+            var list = $('<ol>').addClass('ref-temp');
+            $(this).children().each(function(){
+                var id = $(this).attr('id');
+                var listItem = $('<li>').attr('id', id);
+                var html = $(this).find('p').first().html();
+                listItem.html( html.substring(3, html.length) );
+                listItem.appendTo(list);
+            });
+            list.insertBefore(this);
+            $(this).remove();
+        });
+
+        $('.ref-temp').each(function(){
+           $(this).removeClass('.ref-temp');
+            $(this).addClass('references');
         });
     }
 
+
     function fixImages(){
-         $('p').filter(function(){
+         $('*').filter(function(){
            return $(this).children('img').length > 0;
          }).each(function(){
-             var newContainer = $('<div>');
-             $(this).find('img').appendTo(newContainer);
-             newContainer.insertAfter(this);
-             $(this).remove();
+             var oldContainer = $(this);
+             $(this).find('img').each(function(){
+                 var newContainer = $('<div>').addClass('image-container');
+                 $(this).appendTo(newContainer);
+                 newContainer.insertAfter(oldContainer);
+
+                 var splitSrc = $(this).attr('src').split('/');
+                 var baseName = splitSrc[splitSrc.length-1].split('.')[0];
+                 newContainer.attr('id', baseName);
+             });
+             $(oldContainer).remove();
          });
+    }
+
+
+    function fixHeaders(){
+        $('.level1').each(function(index){
+            var header =  $(this).find('h1');
+            var headerText = header.text();
+            var regex = /^[0-9]\.\s/;
+            var match = headerText.match(regex);
+
+            var wrapper = $('<div>').addClass('chapter-heading-wrapper');
+            var result;
+
+            if(match){
+                result = match[0];
+                header.text(headerText.replace(result, ''));
+            }
+            result = index + ".";
+
+            var numberContainer =  $('<div>').addClass('chapter-number').text(result.trim());
+            wrapper.append(numberContainer);
+            wrapper.insertBefore(header);
+
+            header.remove();
+            header.appendTo(wrapper);
+
+        });
+    }
+
+
+    function print(){
+        // to be implemented properly
+        // print stylesheet only works in chrome so for now this will just link to a pdf exported with that stylesheet
     }
 
 
@@ -320,9 +380,10 @@ $(function(){
         });
 
         $('#print-nav').click(function(){
-                alert("it's coming... :)");
+            document.contentWindow.print();
         });
     }
+
 
 
     function distortTitle(){
@@ -346,18 +407,17 @@ $(function(){
         var indexModel  = buildIndexModel();
         buildIndexView(indexModel);
         removeEmptyReferenceBlocks();
-        initMenu();
-        fixImageSources();
+        fixHeaders();
+        fixReferences();
         fixImages();
-        //distortTitle();
-        //createMap();
+        initMenu();
     });
 
 
     function createMap(){
 
-        var oldHeight = $('.content').height();
-        var contentClone = $('.content').clone();
+        var oldHeight = $('#content').height();
+        var contentClone = $('#content').clone();
         var newHeight = oldHeight.map(0, oldHeight, 0, window.innerHeight*5);
         var ratio = newHeight/oldHeight;
 
@@ -384,7 +444,4 @@ $(function(){
     }
 
 });
-
-
-
 

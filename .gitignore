@@ -1,7 +1,10 @@
 !bower_components
 .editor-settings
-
 content/etc/
 content/icml/
 content/pdf/
 content/comments/
+node_modules/
+Gruntfile.js
+package.json
+less/

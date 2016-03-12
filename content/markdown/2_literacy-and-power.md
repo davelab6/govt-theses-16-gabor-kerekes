@@ -10,14 +10,14 @@
 <span class="print public knowledge literacy frame-of-representation authorship information">The invention of printing technology had far reaching implications. By enabling the fast and cheap reproduction of information, alternative political views could now be effectively disseminated. Print provided the ground for the practice of public discourse and the distribution of knowledge. This slowly lead to the increase of literacy which empowered a growing number of people to question the dogmas of the Christian Church. The fast and cheap reproduction technique of printing meant that authorship over frames of reality and structures of experience was not anymore the monopoly of the clergy. Over the course of centuries, the free flow of information eroded the power of the Church giving way to the Protestant Reformation, the Renaissance the rise of market economies, the Enlightenment, the scientific and industrial revolution and the rise of nation states.</span>
 
 
-![](../imgs/scottForestry.jpg)
+<!-- ![](../imgs/scottForestry.jpg) -->
 
 
 <span class="machine segmentation action system">How could a technical innovation induce such a far reaching process of social change? Did it create this change or did it facilitate latent social forces? According to Marshall McLuhan *"[...]with the Gutenberg technology we move into the age of the take-off of the machine. The principle of segmentation of actions and functions and roles became systematically applicable wherever desired"* [@gutenberggalaxymaking_mcluhan_2011, 276]</span>
 
 <span class="knowledge distribution protocol segmentation legibility frame-of-representation social-organization print">Printing technology's importance did not only lie in its enabling the distribution of knowledge, it was also a protocol of segmentation and modularization, the same protocol that gave rise to the Industrial Society. [@industrialsociety_2016] The main thesis of McLuhan is that new technologies create new ways of framing and perceiving - a new forms of legibility - of the world, which in turn instantiate new forms of social organization. This is what McLuhan meant by the often quoted slogan "The Medium is the Message". The distribution of powers, the specialization of knowledge, the division of labor were all instances of a consciousness that the technology of printing facilitated, or in McLuhan's words: *"Print exists by virtue of the static separation of functions and fosters a mentality that gradually resists any but a separative and compartmentalizing or specialist outlook"* [@gutenberggalaxymaking_mcluhan_2011, 126]</span>
 
-![](../imgs/agriculture_mexico.jpg)
+<!-- ![](../imgs/agriculture_mexico.jpg) -->
 
 <span class="determinism reduction theory complexity social-development">Do technological innovations inevitably create new forms of societies? McLuhan is considered to be a theorist of 'technological determinism'.[@technologicaldeterminism_2015] The basic assumption of this theory is that technological progress is the main driving force of the development of societies. Social determinism on the other hand inverts this relationship and posits that societies are the autonomous forces that shape technology. Both are reductionist theories that try to explain the complex relationships between technology and society in terms of a simple cause-end-effect mechanism.</span>
 
@@ -31,11 +31,11 @@
 
 > It was hoped that [roads] would also increase industry in the areas through which they passed, but this was a secondary concern; they led straight to the glens where rebel lords dominated, passing few centers of population or industry. They were funded from the same taxes that fueled other military expenditure, and they formed a major laboratory for the invention of new siting, surveying, and paving technologies in difficult territory.
 
-![](../imgs/infrared.jpg)
+<!-- ![](../imgs/infrared.jpg) -->
 
 <span class="conclusion legibility power network reduction frame-of-representation">Power thus, is predicated upon the capacity of rendering the world legible. In the case of 18th-19th century Britain, this capacity manifested as the development of road networks and surveying methods to see and to rule over territories. In the case of the medieval church, it was achieved through maintaining control over the circulation of information, so that the only way to read the world was through the frame of religion. Rendering the world legible is always a process of reduction, of cultural framing.</span>
 
 
-![](../imgs/us_census.jpg)
+<!-- ![](../imgs/us_census.jpg) -->
 
 In the following chapter, I will take a closer look at this issue from the perspective of graphic design and what this means in terms of social agency and the role of authorship within our discipline.

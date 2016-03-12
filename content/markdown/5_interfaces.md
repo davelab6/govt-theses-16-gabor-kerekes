@@ -22,7 +22,7 @@ In-between the layers of the stack are interfaces that abstract the details of t
 
 <span class="interface politics hardware stack">The process of abstraction that interfaces perform is a process of rendition which entails a set of decisions about what to hide and what to reveal of the underlying complexity. Inasmuch as they are based on the designer's intentions to achieve a particular end, these decisions are politically charged. Most generally, this is the establishment of meaning in relation to hardware. The BIOS (Basic Input/Output System) abstracts details of the hardware, the operating system (OS) abstracts the BIOS, applications abstract the OS, and the graphic user interface abstract the application.[@therenosoftware_friedrichkittler_1992] Hardware itself is meaningless, it is the stack of software mounted on it that gives it purpose, making it able to perform functions we intend it to; and it  are interfaces through which one's intentions are translated into functions of software.</span>
 
-![](../imgs/gui.jpg)
+<!-- ![](../imgs/gui.jpg) -->
 
 <span class="possibility-space interface form">However, through the abstraction of computing processes into familiar metaphors, interfaces also define the space of possibilities in which one's intentions can exist. They define what intentions are actually possible to hold, what processes one can or cannot initiate. By their design, interfaces give form to both ends that they connect: both to computation and to the user.</span>
 
