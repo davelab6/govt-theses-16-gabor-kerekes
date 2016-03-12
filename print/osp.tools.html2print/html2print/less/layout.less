@@ -1,5 +1,5 @@
-@import "../../style/setup.less";
-@import "html2print.less";
+@import "variables.less";
+@import "main.less";
 
 .header,
 .content-body,
@@ -48,14 +48,14 @@
         text-align: right;
     }
 
-    &:nth-child(odd) .content-area {
-        margin-left: @page-margin-inside;
-        margin-right: @page-margin-outside;
+    &:nth-child(odd) .page {
+        margin-left: @margin-inside;
+        margin-right: @margin-outside;
     }
 
-    &:nth-child(even) .content-area {
-        margin-left: @page-margin-outside;
-        margin-right: @page-margin-inside;
+    &:nth-child(even) .page {
+        margin-left: @margin-outside;
+        margin-right: @margin-inside;
     }
 }
 

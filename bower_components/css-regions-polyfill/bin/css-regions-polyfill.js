@@ -2316,7 +2316,7 @@ module.exports = (function(window, document) { "use strict";
 				
 			}
 			
-			if(numberOfIDs>255) numberOfIds=255;
+			if(numberOfIDs>255) numberOfIDs=255;
 			if(numberOfClasses>255) numberOfClasses=255;
 			if(numberOfTags>255) numberOfTags=255;
 			
@@ -6269,7 +6269,7 @@ module.exports = (function(window, document) { "use strict";
 	};
 	
 	enableObjectModel(window, document, cssRegions);
-	
+	window.cssRegions = cssRegions;
 	return cssRegions;
 })(window, document);
 require.define('src/css-regions/polyfill.js');

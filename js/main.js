@@ -26,7 +26,15 @@ $(function(){
 
         jqxhr.done(function(){
             htmlcontent.forEach(function(content){
-                $('.content').append(content);
+                var c = $(content);
+                //fix image sources
+                c.find('img').each(function(){
+                    var src = $(this).attr('src');
+                    var splitSrc = src.split("/");
+                    var fname = splitSrc[splitSrc.length-1];
+                    $(this).attr('src', 'content/imgs/'+fname);
+                });
+                $('#content').append(c);
             });
         });
 
@@ -43,7 +51,7 @@ $(function(){
 
         var tagCounts = {};
 
-        $('.content').find('span').each(function(){
+        $('#content').find('span').each(function(){
 
             var span = $(this);
 
@@ -266,23 +274,42 @@ $(function(){
         });
     }
 
-    function fixImageSources(){
-        $('img').each(function(){
-           var src = $(this).attr('src');
-            var splitSrc = src.split("/");
-            var fname = splitSrc[splitSrc.length-1];
-            $(this).attr('src', 'content/imgs/'+fname);
+    function fixReferences(){
+        $('.references').each(function(){
+            var list = $('<ol>').addClass('ref-temp');
+            $(this).children().each(function(){
+                var id = $(this).attr('id');
+                var listItem = $('<li>').attr('id', id);
+                var html = $(this).find('p').first().html();
+                listItem.html( html.substring(3, html.length) );
+                listItem.appendTo(list);
+            });
+            list.insertBefore(this);
+            $(this).remove();
+        });
+
+        $('.ref-temp').each(function(){
+           $(this).removeClass('.ref-temp');
+            $(this).addClass('references');
         });
     }
 
+
     function fixImages(){
-         $('p').filter(function(){
+         $('*').filter(function(){
            return $(this).children('img').length > 0;
          }).each(function(){
-             var newContainer = $('<div>');
-             $(this).find('img').appendTo(newContainer);
-             newContainer.insertAfter(this);
-             $(this).remove();
+             var oldContainer = $(this);
+             $(this).find('img').each(function(){
+                 var newContainer = $('<div>').addClass('image-container');
+                 $(this).appendTo(newContainer);
+                 newContainer.insertAfter(oldContainer);
+
+                 var splitSrc = $(this).attr('src').split('/');
+                 var baseName = splitSrc[splitSrc.length-1].split('.')[0];
+                 newContainer.attr('id', baseName);
+             });
+             $(oldContainer).remove();
          });
     }
 
@@ -320,9 +347,28 @@ $(function(){
         });
 
         $('#print-nav').click(function(){
-                alert("it's coming... :)");
+            //H2P.setContentSource( $('#text-wrapper'));
+            window.location = "print.html"
         });
+
+
+
     }
+
+
+    function prepareForPrint(){
+        $('p').filter(function(){
+            return $(this).find('a').filter(function(){
+                    return $(this).attr('href').indexOf('vimeo') > -1;
+                }).length > 0;
+        }).addClass('h2p-exclude');
+
+        $('iframe').each(function(){  $(this).addClass('h2p-exclude')   });
+
+        $('section.level1, .table-of-contents, .maintitle').append($('<div>').addClass('h2p-break-after'));
+
+    }
+
 
 
     function distortTitle(){
@@ -343,12 +389,14 @@ $(function(){
 
 
     loadContent().done(function(){
+
         var indexModel  = buildIndexModel();
         buildIndexView(indexModel);
         removeEmptyReferenceBlocks();
-        initMenu();
-        fixImageSources();
+        fixReferences();
         fixImages();
+        initMenu();
+        prepareForPrint();
         //distortTitle();
         //createMap();
     });
@@ -356,8 +404,8 @@ $(function(){
 
     function createMap(){
 
-        var oldHeight = $('.content').height();
-        var contentClone = $('.content').clone();
+        var oldHeight = $('#content').height();
+        var contentClone = $('#content').clone();
         var newHeight = oldHeight.map(0, oldHeight, 0, window.innerHeight*5);
         var ratio = newHeight/oldHeight;
 
@@ -384,6 +432,17 @@ $(function(){
     }
 
 });
+
+
+
+Storage.prototype.setObject = function(key, value) {
+    this.setItem(key, JSON.stringify(value));
+};
+
+Storage.prototype.getObject = function(key) {
+    var value = this.getItem(key);
+    return value && JSON.parse(value);
+};
 
 
 

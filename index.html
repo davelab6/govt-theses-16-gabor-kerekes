@@ -11,11 +11,11 @@
     <meta property="og:image" content="http://kabk.github.io/govt-theses-16-gabor-kerekes/content/imgs/gui.jpg">
     <title>From Text to Process</title>
     <link rel="stylesheet" type="text/css" href="bower_components/css-reset/reset.css">
-    <link rel="stylesheet" type="text/less" href="less/style.less">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="h2p-exclude">
             <a id="index-nav" class="hidden">Index</a>
             <a id="title-nav">From Text To Process</a>
             <a id="print-nav" class="hidden">Print</a>
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div id="text-wrapper">
+    <div id="text-wrapper" class="h2p-content">
         <section class="maintitle">
             <div><span id="fromtext">From Text</span> <br><span id="toprocess">to Process</span></div>
             <div>
@@ -66,7 +66,7 @@
                 <li>Conclusion</li>
             </ol>
         </section>
-		<div class="content">
+		<div id="content">
 
 		</div>
     </div>
@@ -74,8 +74,7 @@
     <div id="map" class="text-wrapper">
 
     </div>
-
-	<script src="bower_components/less/dist/less.min.js"></script>
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" rel="script"  src="js/main.js"></script>
+	<script type="text/javascript" src="print/osp.tools.html2print/html2print/js/html2print.js"></script>
+    <script type="text/javascript" rel="script"  src="js/main.js" class="h2p-content"></script>
 </body>

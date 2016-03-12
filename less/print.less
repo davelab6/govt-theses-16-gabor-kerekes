@@ -1,0 +1,212 @@
+
+
+@import "fonts";
+@import "../print/osp.tools.html2print/html2print/less/variables.less";
+
+@media all {
+
+    .page-break{
+        page-break-before: always;
+    }
+
+    .content-region {
+        region-fragment: break;
+    }
+
+     #text-wrapper{
+         margin: 0;
+
+         #content{
+
+         }
+
+         section{
+             padding: 0;
+             margin: 0;
+         }
+
+         .maintitle{
+             color: red !important;
+             //position: relative;
+             top: 0;
+             left: 0;
+             transform: translate(0, 0px);
+             width: 90%;
+             padding: 0;
+             //padding-left: 20%;
+             font-weight: bold;
+             z-index: 0;
+             line-height: 15pt;
+             margin: 0;
+             page-break-after: always;
+             break-after: always;
+
+             #fromtext, #toprocess{
+
+                 line-height: 16pt;
+             }
+
+             div:first-child{
+                 font-size: 100pt;
+                 line-height: 90pt;
+                 padding-bottom: 20mm;
+                 padding-top: 30mm;
+
+                 span:first-child:before{
+                     content: "   ";
+                     padding-bottom: 50mm;
+                 }
+
+                 span:nth-child(3){
+                     font-size: 90%;
+                     letter-spacing: -1mm;
+
+                 }
+
+             }
+
+             div:nth-child(2){
+                 font-size: 12pt;
+             }
+
+         }
+
+         .table-of-contents{
+             border: none;
+             padding: 0;
+             //break-after: region;
+             h1{
+                 font-size: 16pt;
+
+             }
+
+             #toc-list{
+                 font-size: 12pt;
+             }
+         }
+
+         #content {
+
+             section{
+                 padding: 0;
+                 margin: 0;
+             }
+
+
+
+             h1{
+                 font-size: 40pt;
+                 region-fragment: break;
+                 margin: 0;
+                 text-align: left;
+                 padding: 0;
+                 padding-bottom: 10mm;
+                 padding-top: 0mm;
+                 break-before: always;
+             }
+
+             h2{
+                 font-size: 20pt;
+                 padding: 0;
+                 text-align: left;
+                 padding-top: 10mm;
+
+             }
+
+             p{
+                 width: @page-width;
+                 font-size: 14pt;
+                 line-height: 16pt;
+                 margin: 0;
+                 text-indent: 12mm;
+             }
+
+             blockquote{
+                 ol,p{
+                     padding: 0;
+                     font-size: 16pt;
+                     line-height: 17pt;
+                     padding-bottom: 10mm;
+                     padding-top: 10mm;
+                 }
+                 ol{
+                     padding-bottom: 0;
+                     margin: 0;
+                 }
+                 page-break-inside: avoid;
+             }
+
+
+             .references{
+                 padding-top: 5mm;
+                 margin-left: 20mm;
+                 width: 110mm;
+
+                 &::before{
+                     margin-left: 12mm;
+                     margin-bottom: 5mm;
+                     font-size: 8pt;
+                     font-weight: normal;
+                 }
+
+                 ol{
+                     font-size: 8pt;
+                     width: 100%;
+                     line-height: 9pt;
+                     li{
+                         page-break-inside: avoid;
+                     }
+                 }
+
+             }
+
+
+
+             .image-container{
+                 display: block;
+                 width: @paper-width;
+                 height: 100%;
+                 padding-bottom: 10mm;
+                 padding-top: 10mm;
+                 position: relative;
+                 left: -30mm;
+
+                 img{
+                     width: 100%;
+                     display: block;
+                     float: none;
+                     padding: 0;
+                     margin: auto;
+                 }
+             }
+         }
+     }
+
+
+     .break-before{
+         -webkit-region-break-before: always;
+     }
+
+     .break-after{
+         -webkit-region-break-after: always;
+     }
+}
+
+@media print {
+    html {
+        width: @paper-width;
+        height: @paper-height;
+    }
+
+    body{
+        width: @paper-width;
+        height: @paper-height;
+    }
+
+    .paper{
+        width: @paper-width;
+        height: @paper-height;
+    }
+}
+
+

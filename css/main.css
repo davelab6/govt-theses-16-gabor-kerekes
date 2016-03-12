@@ -1,0 +1,419 @@
+@font-face {
+  font-family: CharisSILW;
+  src: url(../fonts/charis-sil/CharisSIL-R.woff);
+}
+@font-face {
+  font-family: CharisSILW;
+  font-style: italic;
+  src: url(../fonts/charis-sil/CharisSIL-I.woff);
+}
+@font-face {
+  font-family: CharisSILW;
+  font-weight: bold;
+  src: url(../fonts/charis-sil/CharisSIL-B.woff);
+}
+@font-face {
+  font-family: CharisSILW;
+  font-weight: bold;
+  font-style: italic;
+  src: url(../fonts/charis-sil/CharisSIL-BI.woff);
+}
+@font-face {
+  font-family: "Fira Mono";
+  src: url(../fonts/fira-mono/FiraMono-Regular.woff);
+}
+@font-face {
+  font-family: "Fira Mono";
+  font-weight: 400;
+  src: url(../fonts/fira-mono/FiraMono-Medium.woff);
+}
+@font-face {
+  font-family: "Fira Mono";
+  font-weight: bold;
+  src: url(../fonts/fira-mono/FiraMono-Bold.woff);
+}
+html {
+  background-color: ghostwhite;
+  color: black;
+  font-family: 'CharisSILW';
+}
+nav {
+  font-family: "Clear Sans";
+  text-transform: uppercase;
+  font-size: 0.85em;
+  z-index: 999;
+}
+body {
+  overflow-x: hidden;
+}
+body a {
+  color: orangered;
+  cursor: pointer;
+}
+body em {
+  font-style: italic;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7vh;
+  top: 0;
+  left: 0;
+  background-color: ghostwhite;
+  font-size: 2em;
+  font-weight: bold;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  z-index: 999;
+}
+header.dark {
+  background-color: black;
+}
+header a {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+header a.hidden {
+  display: none;
+}
+header a:hover {
+  color: cyan;
+}
+#index {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  margin-top: 7vh;
+  top: 0;
+  left: 0;
+  display: none;
+  color: ghostwhite;
+  background-color: black;
+}
+#index nav:hover {
+  color: orangered;
+}
+#index .index-section {
+  width: 100%;
+  height: 100%;
+}
+#index aside {
+  width: 5vw;
+  position: absolute;
+  color: orangered;
+  height: inherit;
+  font-family: "Fira Mono";
+}
+#index aside nav {
+  -webkit-transform: translate(0, -50%) rotate(-90deg);
+  -moz-transform: translate(0, -50%) rotate(-90deg);
+  -ms-transform: translate(0, -50%) rotate(-90deg);
+  -o-transform: translate(0, -50%) rotate(-90deg);
+  transform: translate(0, -50%) rotate(-90deg);
+  position: relative;
+  top: 50%;
+  text-align: center;
+}
+#index #index-tags-wrapper {
+  height: 70vh;
+  background-color: black;
+  color: white;
+}
+#index #index-tags-wrapper.highlight {
+  background-color: orangered;
+  color: black;
+  cursor: pointer;
+}
+#index #index-tags-wrapper.highlight nav {
+  color: black;
+}
+#index #index-tags {
+  font-size: 2em;
+  line-height: 1.2em;
+  font-family: "Fira Mono";
+  font-weight: 900;
+  display: flex;
+}
+#index #index-tags #index-tag-control {
+  cursor: pointer;
+  color: orangered;
+  position: absolute;
+  right: 50%;
+  -webkit-transform: translate(50%, 0);
+  -moz-transform: translate(50%, 0);
+  -ms-transform: translate(50%, 0);
+  -o-transform: translate(50%, 0);
+  transform: translate(50%, 0);
+  top: 58vh;
+  display: flex;
+  z-index: 99;
+  text-decoration: underline;
+}
+#index #index-tags #index-tag-control nav {
+  display: inline-flex;
+  font-size: 0.45em !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-weight: normal;
+}
+#index #index-tags #index-tags-selected,
+#index #index-tags #index-tags-selection {
+  display: flex;
+}
+#index #index-tags #index-tags-selection {
+  padding-left: 5vw;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+#index #index-tags #index-tags-selection .tagColumn {
+  padding-top: 5vh;
+  flex: 0 0 auto;
+  padding-right: 100px;
+}
+#index #index-tags #index-tags-selected {
+  align-items: center;
+  font-size: 0.8em;
+  margin: auto;
+  display: none;
+}
+#index #index-tags #index-tags-selected span {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+#index #index-tags #index-tags-selected span::after {
+  content: ",";
+}
+#index #index-tags #index-tags-selected span:last-child::after {
+  content: "";
+}
+#index #index-tags .tag {
+  opacity: 0.2;
+  cursor: default;
+  color: #b4b4b4;
+}
+#index #index-tags .tag.selectable {
+  opacity: 1;
+  cursor: pointer;
+}
+#index #index-tags .tag.selectable:hover {
+  color: orangered;
+}
+#index #index-tags .tag.selected {
+  color: cyan;
+}
+#index #index-snippets-wrapper {
+  background-color: black;
+  height: 73vh;
+  width: 101.1%;
+  font-family: "Charis SIL";
+}
+#index #index-snippets-wrapper.rel {
+  position: relative;
+  top: -15px;
+}
+#index #index-snippets-wrapper.highlight {
+  background-color: orangered;
+  color: black;
+  cursor: pointer;
+}
+#index #index-snippets-preview {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding-top: 10vh;
+  font-size: 3em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+#index #index-snippets-preview.hidden {
+  display: none;
+}
+#index #index-snippets {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding-top: 10vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+#index #index-snippets.hidden {
+  display: none;
+}
+#index #index-snippets .snippet-container {
+  width: 50vw;
+  font-size: 2em;
+  line-height: 1.2em;
+  padding-bottom: 10vh;
+}
+#index #index-snippets .snippet-container .snippet-index {
+  text-align: center;
+  font-size: 1.4em;
+  font-family: "Fira Mono";
+  font-weight: 900;
+  margin-bottom: 2vh;
+}
+@media all {
+  #text-wrapper {
+    margin-top: 7vh;
+  }
+  #text-wrapper .maintitle {
+    position: relative;
+    top: 10vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 999999999;
+    width: 100vw;
+    height: 100vh;
+    color: black;
+    padding-left: 100px;
+    font-weight: bold;
+  }
+  #text-wrapper .maintitle #toprocess {
+    font-family: "Fira Code";
+    font-style: italic;
+    font-weight: 900;
+  }
+  #text-wrapper .maintitle div:first-child {
+    font-size: 14vw;
+  }
+  #text-wrapper .maintitle div:nth-child(2) {
+    font-size: 3vw;
+  }
+  #text-wrapper .table-of-contents {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    font-size: 1.7em;
+    padding-bottom: 20vh;
+    padding-top: 10vh;
+  }
+  #text-wrapper .table-of-contents #toc-list {
+    font-size: 2em;
+    line-height: 1.5em;
+  }
+  #text-wrapper .table-of-contents #toc-list li {
+    border-bottom: 1px solid black;
+  }
+  #text-wrapper .table-of-contents h1 {
+    font-size: 5em;
+    font-weight: bold;
+    padding-bottom: 6vh;
+  }
+  #text-wrapper #content {
+    font-size: 1.7em;
+    line-height: 1.25em;
+    padding-top: 10vh;
+  }
+  #text-wrapper #content h1 {
+    font-weight: bold;
+    font-size: 5em;
+    line-height: 1em;
+    padding-bottom: 6vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+  #text-wrapper #content h2 {
+    font-size: 1.5em;
+    padding-bottom: 3vh;
+  }
+  #text-wrapper #content h1,
+  #text-wrapper #content h2 {
+    text-transform: uppercase;
+    text-align: center;
+  }
+  #text-wrapper #content p,
+  #text-wrapper #content blockquote {
+    margin: auto;
+  }
+  #text-wrapper #content p {
+    width: 58%;
+    text-indent: 5%;
+  }
+  #text-wrapper #content p:first-of-type {
+    text-indent: 0;
+  }
+  #text-wrapper #content blockquote {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-style: italic;
+    width: 70%;
+    line-height: 1.2em;
+  }
+  #text-wrapper #content blockquote p {
+    text-indent: 0;
+    width: 100%;
+    margin: 0;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+  }
+  #text-wrapper #content blockquote ol {
+    width: 90%;
+    list-style: decimal;
+    padding: 0;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    padding-left: 7%;
+  }
+  #text-wrapper #content section {
+    margin-bottom: 35vh;
+  }
+  #text-wrapper #content .references {
+    font-family: "Fira Mono";
+    font-size: 0.5em;
+    line-height: normal;
+    width: 40%;
+    margin-left: 27vw;
+    margin-top: 5%;
+  }
+  #text-wrapper #content .references::before {
+    content: "References";
+    display: block;
+    margin-bottom: 5%;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  #text-wrapper #content .references li {
+    list-style: decimal !important;
+  }
+  #text-wrapper #content sup {
+    color: orangered;
+    font-size: 0.5em;
+  }
+  #text-wrapper #content .image-container {
+    width: 100%;
+    margin: auto;
+    height: 100px;
+  }
+  #text-wrapper #content img {
+    width: 100vw;
+    height: auto;
+    float: left;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    margin: 0;
+  }
+  #text-wrapper #content iframe {
+    width: 100%;
+    height: 720px;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+  }
+}
+#map {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.printframe {
+  width: 100vw;
+  height: 3000px;
+}
