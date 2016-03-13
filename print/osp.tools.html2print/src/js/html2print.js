@@ -67,9 +67,8 @@ $(function() {
 
 
 var H2P = (function () {
-
     var masterID = '#master-page';
-    var printConfigUrl = 'print/printConfig.json';
+    var printConfigUrl = 'printConfig.json';
     var beforeLayoutTasks = [];
     var afterLayoutTasks = [];
 
@@ -237,7 +236,7 @@ var H2P = (function () {
     }
 
 
-    // the interface to H2P
+    // interface to H2P
     var self = {
 
         init: init,
