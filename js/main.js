@@ -347,8 +347,7 @@ $(function(){
         });
 
         $('#print-nav').click(function(){
-            //H2P.setContentSource( $('#text-wrapper'));
-            window.location = "print.html"
+            window.location = "../print.html"
         });
 
 
@@ -356,18 +355,6 @@ $(function(){
     }
 
 
-    function prepareForPrint(){
-        $('p').filter(function(){
-            return $(this).find('a').filter(function(){
-                    return $(this).attr('href').indexOf('vimeo') > -1;
-                }).length > 0;
-        }).addClass('h2p-exclude');
-
-        $('iframe').each(function(){  $(this).addClass('h2p-exclude')   });
-
-        $('section.level1, .table-of-contents, .maintitle').append($('<div>').addClass('h2p-break-after'));
-
-    }
 
 
 
@@ -396,7 +383,6 @@ $(function(){
         fixReferences();
         fixImages();
         initMenu();
-        prepareForPrint();
         //distortTitle();
         //createMap();
     });

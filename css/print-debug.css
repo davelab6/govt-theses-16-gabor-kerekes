@@ -39,8 +39,7 @@
 /* GEOMETRY OF THE PAGE */
 /* SIZE OF SPREAD */
 @media all {
-  .h2p-break-after {
-    break-after: always;
+  .breakme {
     page-break-after: always;
   }
 }

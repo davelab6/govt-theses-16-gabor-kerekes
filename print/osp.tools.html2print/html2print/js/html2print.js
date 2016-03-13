@@ -1,178 +1,235 @@
 $(function() {
+    $('iframe').load(function() {
+        var doc = $("iframe").contents().find("html");
 
-    // ________________________________ PREVIEW __________________________________ //
-    $("#preview").click(function(e){
-        e.preventDefault();
-        $(this).toggleClass("button-active");
-        $("html").toggleClass("preview normal");
-    });
-
-    // __________________________________ DEBUG __________________________________ //
-    $("#debug").click(function(e){
-        e.preventDefault();
-        $(this).toggleClass("button-active");
-        $("html").toggleClass("debug");
-    });
-
-    // __________________________________ SPREAD __________________________________ //
-    $("#spread").click(function(e){
-        e.preventDefault();
-        $(this).toggleClass("button-active");
-        $("html").toggleClass("spread");
-    });
-
-    // __________________________________ HIGH RESOLUTION __________________________________ //
-    $("#hi-res").click(function(e){
-        e.preventDefault();
-        $(this).toggleClass("button-active");
-        $("html").toggleClass("export");
-        $("img").each(function(){
-            var hires = $(this).attr("data-alt-src");
-            var lores = $(this).attr("src");
-            $(this).attr("data-alt-src", lores)
-            $(this).attr("src", hires)
+        $('[name="preview"]').change(function() {
+            if($(this).is(":checked")) {
+                doc.addClass("preview");
+                doc.removeClass("normal");
+            } else {
+                doc.removeClass("preview");
+                doc.addClass("normal");
+            }
         });
-        console.log("Wait for hi-res images to load");
-        window.setTimeout(function(){
-            console.log("Check image resolution");
-            // Redlights images too small for printing
-            $("img").each(function(){
-                if (Math.ceil(this.naturalHeight / $(this).height()) < 3) {
-                    console.log($(this).attr("src") + ": " + Math.floor(this.naturalHeight / $(this).height()) );
-                    if($(this).parent().hasClass("moveable")) {
-                        $(this).parent().toggleClass("lo-res");
-                    } else {
-                        $(this).toggleClass("lo-res");
-                    }
-                }
+
+        $('[name="debug"]').change(function() {
+            if($(this).is(":checked")) {
+                doc.addClass("debug");
+            } else {
+                doc.removeClass("debug");
+            }
+        });
+
+        $('[name="spread"]').change(function() {
+            if($(this).is(":checked")) {
+                doc.addClass("spread");
+            } else {
+                doc.removeClass("spread");
+            }
+        });
+
+
+
+        function applyZoom(level){
+            doc.find("#pages").css({
+                "-webkit-transform": "scale(" + level + ")",
+                "-webkit-transform-origin": "0 0"
             });
-        }, 2000);
-    });
+        }
+
+        var prevZoom = localStorage.getItem('H2PZoom');
+        if(prevZoom){
+            $('[name="zoom"]').val(prevZoom*100);
+            applyZoom(prevZoom);
+        }
+
+        $('[name="zoom"]').change(function() {
+            var zoomLevel = $(this).val() / 100;
+            localStorage.setItem('H2PZoom', zoomLevel);
+            applyZoom(zoomLevel);
+        });
 
 
-    // __________________________________ TOC __________________________________ //
-    $(".paper").each(function(){
-        var page = $(this).attr("id");
-        $("#toc-pages").append("<li><a href='#" + page + "'>" + page.replace("-", " ") + "</a></li>")
-    });
+        $('[name="page"]').change(function() {
+            var pageNumber = $(this).val() - 1;
 
-    $("#goto").click(function(e){
-        e.preventDefault();
-        $(this).toggleClass("button-active");
-        $("#toc-pages").toggle();
+            var target = doc.find('.paper:eq(' + pageNumber + ')');
+            var offsetTop = target.offset().top;
+
+            doc.find('body').scrollTop(offsetTop);
+        });
+
+        $("#print").on('click', function() {
+            $("iframe").get(0).contentWindow.print();
+        });
     });
 });
 
 
-
-
-
-var H2P = (function(){
+var H2P = (function () {
 
     var masterID = '#master-page';
-    var init = function (url){
+    var printConfigUrl = 'print/printConfig.json';
+    var beforeLayoutTasks = [];
+    var afterLayoutTasks = [];
 
 
+    function beforeLayout(tasks){
+        if(typeof tasks === 'function'){
+            tasks = [tasks];
+        }
+        beforeLayoutTasks = beforeLayoutTasks.concat(tasks);
+        return self;
+    }
 
-        function cleanContent(content){
-            var container = $('<div>');
-            content.find('.h2p-content').appendTo(container);
-            return container;
+    function afterLayout(tasks){
+        if(typeof tasks === 'function'){
+            tasks = [tasks];
+        }
+        afterLayoutTasks = afterLayoutTasks.concat(tasks);
+        return self;
+    }
+
+
+    var init = function (url) {
+
+        function loadContent(){
+            return new Promise(function(resolve, reject){
+                var content = $('<div>');
+                content.load(url, function (response, status, xhr) {
+                    if ( status == "error" ) {
+                        var msg = "Something went wrong with loading content from " + url;
+                        var err = msg + " " + xhr.status + " " + xhr.statusText;
+                        reject(err);
+                    }
+                    resolve(content);
+                });
+            });
+        }
+
+
+        function cleanContent(c) {
+            var content = c.find('.h2p-content');
+            content.find('.h2p-exclude').remove();
+            return $('<div>').append(content);
+        }
+
+        function createPages(num){
+            for (var i = 0; i < num; i++) {
+                appendPage(masterID);
+            }
+        }
+
+        function fetchPrintConfig(){
+            return new Promise(function(resolve, reject){
+                $.getJSON(printConfigUrl)
+                    .done(function(printConfig){
+                        resolve(printConfig);
+                    })
+                    .fail(function(xhr, status, err){
+                        var msg = 'Cannot find config file at ' + printConfigUrl;
+                        reject(msg + ", " + xhr + " " + status + " " + err);
+                    })
+            });
+        }
+
+        function registerAfterLayoutTasks(){
+            var f = document.getNamedFlow('contentflow');
+            f.addEventListener('regionfragmentchange', function (event) {
+                // validate the target of the event
+                if (event.target !== f) {
+                    debugger;
+                    return;
+                }
+
+                afterLayoutTasks.forEach(function (task) {
+                    task.call();
+                });
+            })
         }
 
 
 
-        return $.getJSON('print/printConfig.json').done(function(config){
-
-            for(var i = 0; i < config['numPages']; i++){
-                appendPage(masterID);
-            }
+        // have to disable scroll, because scrolling can interfere with CSSRegions lib's work
+        $('body').addClass('noScroll');
 
 
-            var contentwrapper = $('<div>').attr('id','content-source').appendTo('body');
-            var dummy = $('<div>');
-            dummy.load(url, function(){
+        // H2P's own tasks to be executed when layout is done
+        var afterLayout = function(){
+            removeEmptyPages();
+            $('body').removeClass('noScroll');
+            $('#loading-spinner').addClass('hidden');
+            setTimeout(function(){
+                $('#loading-spinner').remove();
+            }, 2050);
+        };
 
-                cleanContent($(this)).appendTo(contentwrapper);
+        // adding these to the top of the list
+        beforeLayoutTasks.unshift(beforeLayout);
+        afterLayoutTasks.unshift(afterLayout);
 
-                less.modifyVars(config.style);
+        // need to delay this otherwise the requests would delay the appearance of the loading indicator
+        setTimeout(function(){
 
-                if(!isSafari()){
-                    // disable scrolling, because it can interfere with polyfill
-                    $('body').addClass('noScroll');
+            // start
+            loadContent()
+                .then(function(cnt){
 
-                    var onLayoutFinished = function(){
-                        removeEmptyPages();
-                        $('body').removeClass('noScroll');
-                        console.log('layout complete');
-                    };
+                    var content = cleanContent(cnt);
+                    var contentWrapper = $('<div>').attr('id', 'content-source')
+                        .append(content);
 
-                    less.pageLoadFinished.then(
-                        function() {
-                            initLayout( onLayoutFinished );
-                        }
-                    );
-                }
-            })
-        });
+                    contentWrapper.appendTo('body');
+
+                    fetchPrintConfig().then(function(config){
+
+                        createPages(config['numPages']);
+
+                        beforeLayoutTasks.forEach(function(task){
+                            task.call();
+                        });
+
+                        // this will trigger less to recompile styles with the custom page config variables
+                        less.modifyVars(config.style);
+                        registerAfterLayoutTasks();
+
+                    }).catch(function(err){
+                        alert(err);
+                    });
+
+                }).catch(function(err){
+                alert(err);
+            });
+
+        }, 1);
 
     };
 
-    function initLayout(onFinished){
-        cssRegions.enablePolyfill();
-        var f = document.getNamedFlow('contentflow');
-        f.addEventListener('regionfragmentchange', function(event) {
-            // validate the target of the event
-            if(event.target !== f) { debugger; return; }
-            onFinished();
+
+
+    function updatePageIDs() {
+        pages().each(function (i, page) {
+            $(page).attr('id', "page-" + i);
         });
     }
 
-    function isSafari(){
-        var isSafari = navigator.userAgent.toLowerCase().indexOf("safari") > -1;
-        var isChrome = navigator.userAgent.toLowerCase().indexOf("chrome") > -1;
-        return !(isSafari && isChrome);
-    }
-
-
-
-    function updatePageIDs(){
-        pages().each(function(i, page){
-            $(page).attr('id', "page-"+i);
-        });
-    }
-
-    function page(pageNum){
+    function page(pageNum) {
         return $("#page-" + pageNum);
     }
 
-    function pages(){
-        return $('#pages').children().not( $(masterID) );
+    function pages() {
+        return $('#pages').children().not($(masterID));
     }
 
-    function appendPage(masterID){
+    function appendPage(masterID) {
         var masterClone = $(masterID).clone().attr("id", "page-" + pages().length);
         masterClone.find('.body').addClass('content-target');
-        return masterClone.appendTo( $('#pages') );
+        return masterClone.appendTo($('#pages'));
     }
 
-    function setContentSource(container){
-        var clone = container.clone();
-        console.log(clone.find('.h2p-exclude'));
-        clone.find('.h2p-exclude').remove();
 
-        var content =  clone.get(0).outerHTML;
-        localStorage.setItem('h2pContent', content);
-    }
-
-    //function getContentSource(){
-    //    var content = $.parseHTML( localStorage.getItem('h2pContent') );
-    //    var contentwrapper = $('<div>').attr('id','content-source');
-    //    return $(contentwrapper).append(content);
-    //}
-
-    function removeEmptyPages(){
-        var empty = $('.paper').filter(function(){
+    function removeEmptyPages() {
+        var empty = $('.paper').filter(function () {
             return $(this).find('cssregion').children().length === 0;
         });
 
@@ -180,27 +237,31 @@ var H2P = (function(){
     }
 
 
-    return{
+    // the interface to H2P
+    var self = {
 
         init: init,
         pages: pages,
         page: page,
         appendPage: appendPage,
-        setContentSource: setContentSource,
+        beforeLayout: beforeLayout,
+        afterLayout: afterLayout,
 
         insertPageAfter: function (masterID, pageIndex) {
-            var $page = $(masterID).clone().attr("id",  "page-" + pageIndex+1).insertAfter( page( pageIndex ) );
+            var $page = $(masterID).clone().attr("id", "page-" + pageIndex + 1).insertAfter(page(pageIndex));
             updatePageIDs();
             return $page;
         },
 
         insertPageBefore: function (masterID, pageIndex) {
-            var $page = $(masterID).clone().attr("id",  "page-" + pageIndex).insertBefore( page( pageIndex ) );
+            var $page = $(masterID).clone().attr("id", "page-" + pageIndex).insertBefore(page(pageIndex));
             updatePageIDs();
             return $page;
         }
 
-    }
+    };
+
+    return self;
 
 })();
 
