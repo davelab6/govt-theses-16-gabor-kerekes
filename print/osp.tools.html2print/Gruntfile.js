@@ -1,8 +1,3 @@
-/**
- * Created by GaborK on 13/03/16.
- */
-
-
 
 module.exports = function(grunt){
     require('jit-grunt')(grunt);
@@ -14,20 +9,19 @@ module.exports = function(grunt){
                 separator: ';'
             },
             dist: {
-                src: [  'node_modules/less/dist/less.js',
-                        'node_modules/css-regions-polyfill/bin/css-regions-polyfill.js',
-                        'src/js/gui.js',
+                src: [
+                        'lib/jquery/dist/jquery.js',
                         'src/js/html2print.js'
                 ],
-
-                dest: 'dist/js/html2print.js'
+                dest:   'dist/js/html2print.js'
             }
         },
 
         less: {
             development: {
                 files: {
-                    "dist/less/html2print.less": "src/less/main.less"
+                    "dist/less/html2print.less":    "src/less/main.less",
+                    "dist/css/gui.css":             "src/less/gui.less"
                 }
             }
         },

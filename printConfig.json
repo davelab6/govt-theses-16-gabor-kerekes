@@ -13,7 +13,9 @@
         "header-height":    "0mm",
         "footer-height":    "0mm",
         "header-text":      "''",
-        "footer-text":      "''"
-    }
+        "footer-text":      "''",
+        "mirror-pages":     "false"
+    },
+    "document": "index.html"
 
 }

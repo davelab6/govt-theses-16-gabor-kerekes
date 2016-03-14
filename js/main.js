@@ -313,6 +313,14 @@ $(function(){
          });
     }
 
+    function prepareForPrint(){
+        $('section').each(function(){
+            if($(this).hasClass('level1')){
+                $(this).addClass('h2p-break-after');
+            }
+        });
+    }
+
 
     function initMenu(){
 
@@ -347,7 +355,7 @@ $(function(){
         });
 
         $('#print-nav').click(function(){
-            window.location = "../print.html"
+            window.location = "../print-doc.html"
         });
 
 
@@ -383,6 +391,7 @@ $(function(){
         fixReferences();
         fixImages();
         initMenu();
+        prepareForPrint();
         //distortTitle();
         //createMap();
     });

@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-        <nav class="h2p-exclude">
+        <nav>
             <a id="index-nav" class="hidden">Index</a>
             <a id="title-nav">From Text To Process</a>
             <a id="print-nav" class="hidden">Print</a>
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div id="text-wrapper" class="h2p-content">
+    <div id="text-wrapper" class="h2p-include">
         <section class="maintitle">
             <div><span id="fromtext">From Text</span> <br><span id="toprocess">to Process</span></div>
             <div>
@@ -59,7 +59,7 @@
                 <li>Abstract</li>
                 <li>1. Introduction – The World as Text</li>
                 <li>2. Literacy and power</li>
-                <li>3. Designer as agent<li/>
+                <li>3. Designer as agent</li>
                 <li>4. Code is law</li>
                 <li>5. Interfaces</li>
                 <li>6. The World as Process</li>
@@ -74,7 +74,6 @@
     <div id="map" class="text-wrapper">
 
     </div>
-	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
-	<script type="text/javascript" src="print/osp.tools.html2print/src/js/html2print.js"></script>
-    <script type="text/javascript" rel="script"  src="js/main.js" class="h2p-content"></script>
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" class="h2p-include"></script>
+    <script type="text/javascript" rel="script"  src="js/main.js" class="h2p-include"></script>
 </body>

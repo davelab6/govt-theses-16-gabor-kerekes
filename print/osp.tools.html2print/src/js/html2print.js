@@ -1,6 +1,187 @@
-$(function() {
-    $('iframe').load(function() {
-        var doc = $("iframe").contents().find("html");
+(function () {
+
+    var masterID = '#master-page';
+    var printConfigUrl = 'printConfig.json';
+
+    // things that will be hackily loaded into the iframe
+    var dirName = 'osp.tools.html2print/';
+    var dirPath = document.currentScript.src.split(dirName)[0] + dirName;
+    var libPaths = [    dirPath + 'lib/css-regions-polyfill/bin/css-regions-polyfill.min.js',
+                        dirPath + 'lib/less/dist/less.min.js'
+                    ];
+    var h2pStylePath = dirPath + 'dist/less/html2print.less';
+
+    var config = null;
+    var iFrame = null;
+
+
+    function loadPrintConfig() {
+        return new Promise(function (resolve, reject) {
+            $.getJSON(printConfigUrl)
+                .done(function (printConfig) {
+                    resolve(printConfig);
+                })
+                .fail(function (xhr, status, err) {
+                    var msg = 'Cannot find config file at ' + printConfigUrl;
+                    reject(msg + ", " + xhr + " " + status + " " + err);
+                })
+        });
+    }
+
+    //loading content this way, instead of an iframe, because it's difficult to reset css in an iframe
+    function loadContent() {
+        return new Promise(function (resolve, reject) {
+            var content = $('<div>');
+            content.load(config['document'], function (response, status, xhr) {
+                if (status == "error") {
+                    var msg = "Something went wrong with loading content from " + url;
+                    var err = msg + " " + xhr.status + " " + xhr.statusText;
+                    reject(err);
+                }
+                resolve(content);
+            });
+        });
+    }
+
+    function cleanContent(c) {
+        var content = c.find('.h2p-include');
+        content.find('.h2p-exclude').remove();
+        var contentWrapper = $('<div>').attr('id', 'content-source').append(content);
+        return $(contentWrapper).append(content);
+    }
+
+
+    function getScripts() {
+        var scripts = [];
+        libPaths.forEach(function (lib) {
+            scripts.push(
+
+                $('<script>').attr(
+                {   'type':  "text/javascript",
+                    'src': lib
+                })
+
+            )
+        });
+        return scripts;
+    }
+
+    function getStyle(){
+        return $('<link>').attr({
+            'rel': 'stylesheet/less',
+            'href': h2pStylePath,
+            'media': 'all',
+            'charset': 'utf-8'
+        })
+    }
+
+    function createPage(masterID, pageNum) {
+        var masterClone = $(masterID)
+            .clone()
+            .attr("id", "page-" + pageNum);
+        masterClone.find('.body').addClass('content-target');
+        return masterClone;
+    }
+
+
+    function createPages(num) {
+        var pages = $('<div>').attr('id', 'pages');
+        for (var i = 0; i < num; i++) {
+            createPage(masterID, i).appendTo(pages);
+        }
+        return pages;
+    }
+
+    function buildIFrameBody(elements){
+        var body = $('<body>');
+        elements.forEach(function(element){
+            if(element.constructor === Array){
+                element.forEach(function(el){
+                    el.appendTo(body);
+                })
+            } else {
+                element.appendTo(body);
+            }
+        });
+        return body;
+    }
+
+    function buildIFrame( content ) {
+
+        var body = buildIFrameBody(
+                    [
+                        getStyle(),
+                        getScripts(),
+                        cleanContent(content),
+                        createPages(config['numPages'])
+                    ]
+        );
+
+        var _iFrame = $('<iframe>').attr('id', 'viewport').prependTo('body').get(0);
+        var doc = _iFrame.contentWindow.document;
+
+        doc.open();
+        doc.write(body.html());
+        doc.close();
+
+        return new Promise(function(resolve){
+            $(_iFrame).load(function(){
+                iFrame = _iFrame;
+                resolve()
+            });
+        });
+    }
+
+
+    // this will trigger less to recompile styles with the custom page config variables
+    // returns a promise
+    function applyPageConfig(){
+        if(config.style['mirror-pages']){
+            $(iFrame).contents().find('#pages').addClass('mirrored');
+        }
+        return iFrame.contentWindow.less.modifyVars(config['style']);
+    }
+
+    function removeEmptyPages() {
+        var empty = $(iFrame.contentWindow.document).find('.paper').filter(function () {
+            return $(this).find('cssregion').children().length === 0;
+        });
+        empty.remove();
+    }
+
+    function waitForLayoutToFinish() {
+        var flow = iFrame.contentWindow.document.getNamedFlow('contentflow');
+        return new Promise(function(resolve){
+            flow.addEventListener('regionfragmentchange', function (event) {
+                // validate the target of the event
+                if (event.target !== flow) {
+                    return;
+                }
+                resolve();
+            });
+        });
+    }
+
+
+
+    function onBeforeLayout(){
+        // have to disable scroll, because scrolling can interfere with CSSRegions lib's work
+        $(iFrame).contents().find('body').addClass('noScroll');
+    }
+
+
+    // H2P's own tasks to be executed when layout is done
+   function onAfterLayout () {
+        removeEmptyPages();
+        var spinner = $('#loading-spinner').addClass('hidden');
+        $(iFrame).contents().find('body').removeClass('noScroll');
+        setTimeout(function () {
+            spinner.remove();
+        }, 2050);
+    }
+
+    function initGUI(){
+        var doc = $(iFrame).contents().find("html");
 
         $('[name="preview"]').change(function() {
             if($(this).is(":checked")) {
@@ -60,207 +241,31 @@ $(function() {
         });
 
         $("#print").on('click', function() {
+            applyZoom(1);
             $("iframe").get(0).contentWindow.print();
         });
-    });
-});
-
-
-var H2P = (function () {
-    var masterID = '#master-page';
-    var printConfigUrl = 'printConfig.json';
-    var beforeLayoutTasks = [];
-    var afterLayoutTasks = [];
-
-
-    function beforeLayout(tasks){
-        if(typeof tasks === 'function'){
-            tasks = [tasks];
-        }
-        beforeLayoutTasks = beforeLayoutTasks.concat(tasks);
-        return self;
-    }
-
-    function afterLayout(tasks){
-        if(typeof tasks === 'function'){
-            tasks = [tasks];
-        }
-        afterLayoutTasks = afterLayoutTasks.concat(tasks);
-        return self;
     }
 
 
-    var init = function (url) {
-
-        function loadContent(){
-            return new Promise(function(resolve, reject){
-                var content = $('<div>');
-                content.load(url, function (response, status, xhr) {
-                    if ( status == "error" ) {
-                        var msg = "Something went wrong with loading content from " + url;
-                        var err = msg + " " + xhr.status + " " + xhr.statusText;
-                        reject(err);
-                    }
-                    resolve(content);
-                });
-            });
-        }
-
-
-        function cleanContent(c) {
-            var content = c.find('.h2p-content');
-            content.find('.h2p-exclude').remove();
-            return $('<div>').append(content);
-        }
-
-        function createPages(num){
-            for (var i = 0; i < num; i++) {
-                appendPage(masterID);
-            }
-        }
-
-        function fetchPrintConfig(){
-            return new Promise(function(resolve, reject){
-                $.getJSON(printConfigUrl)
-                    .done(function(printConfig){
-                        resolve(printConfig);
-                    })
-                    .fail(function(xhr, status, err){
-                        var msg = 'Cannot find config file at ' + printConfigUrl;
-                        reject(msg + ", " + xhr + " " + status + " " + err);
-                    })
-            });
-        }
-
-        function registerAfterLayoutTasks(){
-            var f = document.getNamedFlow('contentflow');
-            f.addEventListener('regionfragmentchange', function (event) {
-                // validate the target of the event
-                if (event.target !== f) {
-                    debugger;
-                    return;
-                }
-
-                afterLayoutTasks.forEach(function (task) {
-                    task.call();
-                });
+    // need to delay this otherwise the requests would delay the appearance of the loading indicator
+    setTimeout(function () {
+        loadPrintConfig()
+            .then(function (conf) {
+                config = conf;
+                return loadContent();
             })
-        }
-
-
-
-        // have to disable scroll, because scrolling can interfere with CSSRegions lib's work
-        $('body').addClass('noScroll');
-
-
-        // H2P's own tasks to be executed when layout is done
-        var afterLayout = function(){
-            removeEmptyPages();
-            $('body').removeClass('noScroll');
-            $('#loading-spinner').addClass('hidden');
-            setTimeout(function(){
-                $('#loading-spinner').remove();
-            }, 2050);
-        };
-
-        // adding these to the top of the list
-        beforeLayoutTasks.unshift(beforeLayout);
-        afterLayoutTasks.unshift(afterLayout);
-
-        // need to delay this otherwise the requests would delay the appearance of the loading indicator
-        setTimeout(function(){
-
-            // start
-            loadContent()
-                .then(function(cnt){
-
-                    var content = cleanContent(cnt);
-                    var contentWrapper = $('<div>').attr('id', 'content-source')
-                        .append(content);
-
-                    contentWrapper.appendTo('body');
-
-                    fetchPrintConfig().then(function(config){
-
-                        createPages(config['numPages']);
-
-                        beforeLayoutTasks.forEach(function(task){
-                            task.call();
-                        });
-
-                        // this will trigger less to recompile styles with the custom page config variables
-                        less.modifyVars(config.style);
-                        registerAfterLayoutTasks();
-
-                    }).catch(function(err){
-                        alert(err);
-                    });
-
-                }).catch(function(err){
-                alert(err);
+            .then(buildIFrame)
+            .then(function(){
+                onBeforeLayout();
+                initGUI();
+                return applyPageConfig();
+            })
+            .then(waitForLayoutToFinish)
+            .then(onAfterLayout)
+            .catch(function (err) {
+                console.log(err);
             });
-
-        }, 1);
-
-    };
-
-
-
-    function updatePageIDs() {
-        pages().each(function (i, page) {
-            $(page).attr('id', "page-" + i);
-        });
-    }
-
-    function page(pageNum) {
-        return $("#page-" + pageNum);
-    }
-
-    function pages() {
-        return $('#pages').children().not($(masterID));
-    }
-
-    function appendPage(masterID) {
-        var masterClone = $(masterID).clone().attr("id", "page-" + pages().length);
-        masterClone.find('.body').addClass('content-target');
-        return masterClone.appendTo($('#pages'));
-    }
-
-
-    function removeEmptyPages() {
-        var empty = $('.paper').filter(function () {
-            return $(this).find('cssregion').children().length === 0;
-        });
-
-        empty.remove();
-    }
-
-
-    // interface to H2P
-    var self = {
-
-        init: init,
-        pages: pages,
-        page: page,
-        appendPage: appendPage,
-        beforeLayout: beforeLayout,
-        afterLayout: afterLayout,
-
-        insertPageAfter: function (masterID, pageIndex) {
-            var $page = $(masterID).clone().attr("id", "page-" + pageIndex + 1).insertAfter(page(pageIndex));
-            updatePageIDs();
-            return $page;
-        },
-
-        insertPageBefore: function (masterID, pageIndex) {
-            var $page = $(masterID).clone().attr("id", "page-" + pageIndex).insertBefore(page(pageIndex));
-            updatePageIDs();
-            return $page;
-        }
-
-    };
-
-    return self;
+    }, 1);
 
 })();
 

@@ -40,22 +40,39 @@
 }
 
 
-/* mirrored pages */
-.paper {
-    &:nth-child(odd) .header {
-        text-align: right;
+
+
+#pages{
+
+    /* single page layout as default */
+    .paper {
+        .header {
+            text-align: right;
+        }
+        .page {
+            margin-left: @margin-inside;
+            margin-right: @margin-outside;
+        }
     }
 
-    &:nth-child(odd) .page {
-        margin-left: @margin-inside;
-        margin-right: @margin-outside;
+    /* mirrored pages */
+
+    &.mirrored{
+        .paper{
+            &:nth-child(even) .header {
+                text-align: left;
+            }
+
+            &:nth-child(even) .page {
+                margin-left: @margin-outside;
+                margin-right: @margin-inside;
+            }
+        }
+
     }
 
-    &:nth-child(even) .page {
-        margin-left: @margin-outside;
-        margin-right: @margin-inside;
-    }
 }
+
 
 img {
     max-width: 100%;
