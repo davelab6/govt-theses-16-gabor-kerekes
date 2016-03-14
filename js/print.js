@@ -3,18 +3,24 @@
  */
 
 
+document.addEventListener('layoutReady', function(){
 
-var beforeLayout = function(){
+    var currentChapter = null;
+    $('.paper').each(function(){
 
-    $('.table-of-contents, .maintitle').addClass('h2p-break-after');
+        var chapterHeading = $(this).find('.chapter-heading-wrapper');
+        if(chapterHeading.length > 0){
+            currentChapter = chapterHeading.find('h1').text();
+        }
 
-    // for some reason it doesn't work to select level1 elements directly
+        if(currentChapter && chapterHeading.length === 0 && $(this).find('img').length === 0 ){
+            var sideBar = $('<div>').addClass('sidebar');
+            sideBar.append($('<div>').addClass('chapter-side-nav').text(currentChapter));
+            $(this).append(sideBar);
+        }
 
-};
+    });
 
-var afterLayout = function(){
-   console.log('done');
-};
-
+});
 
 

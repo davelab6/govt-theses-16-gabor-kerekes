@@ -112,11 +112,9 @@ body.noScroll {
         margin-bottom: @margin-bottom;
         display: inline-block;
         overflow: visible;
-
         .body {
-            height: @page-height - @header-height - @footer-height ;
-            width: @page-width;
-            height: @page-height;
+            height: @body-height;
+            width: @body-width;
             position: relative;
         }
     }
@@ -172,4 +170,8 @@ body.noScroll {
 
 .h2p-break-after{
     break-after: always;
+}
+
+.h2p-exclude{
+    display: none;
 }

@@ -281,7 +281,7 @@ $(function(){
                 var id = $(this).attr('id');
                 var listItem = $('<li>').attr('id', id);
                 var html = $(this).find('p').first().html();
-                listItem.html( html.substring(3, html.length) );
+                $('<span>').append( html.substring(3, html.length)).appendTo(listItem);
                 listItem.appendTo(list);
             });
             list.insertBefore(this);
@@ -313,12 +313,44 @@ $(function(){
          });
     }
 
+
+    function fixHeaders(){
+        $('.level1').each(function(index){
+            var header =  $(this).find('h1');
+            var headerText = header.text();
+            var regex = /^[0-9]\.\s/;
+            var match = headerText.match(regex);
+
+            var wrapper = $('<div>').addClass('chapter-heading-wrapper');
+            var result;
+
+            if(match){
+                result = match[0];
+                header.text(headerText.replace(result, ''));
+            }
+            result = index + ".";
+
+            var numberContainer =  $('<div>').addClass('chapter-number').text(result.trim());
+            wrapper.append(numberContainer);
+            wrapper.insertBefore(header);
+
+            header.remove();
+            header.appendTo(wrapper);
+
+        });
+    }
+
+
+
     function prepareForPrint(){
+        $('#maintitle').addClass('h2p-break-after');
+        $('#table-of-contents').addClass('h2p-break-after');
         $('section').each(function(){
             if($(this).hasClass('level1')){
                 $(this).addClass('h2p-break-after');
             }
         });
+
     }
 
 
@@ -335,7 +367,7 @@ $(function(){
 
         $('#index-nav').click(function(){
              $('body').css('overflow-y', 'hidden');
-            $('.maintitle').hide();
+            $('#maintitle').hide();
              $('#index').slideDown(150, function(){
                  $(this).removeClass('hidden');
              });
@@ -350,15 +382,13 @@ $(function(){
                 $(this).addClass('hidden');
                 $('body').css('overflow-y', 'auto');
             });
-            $('.maintitle').show();
+            $('#maintitle').show();
             $('header').removeClass('dark');
         });
 
         $('#print-nav').click(function(){
-            window.location = "../print-doc.html"
+            window.location = "print.html"
         });
-
-
 
     }
 
@@ -372,7 +402,7 @@ $(function(){
             if($(document).scrollTop() < window.innerHeight){
                 var stretch = sctop.map(0, window.innerHeight, 1, 100);
                 console.log(sctop, stretch);
-                $('.maintitle').css({
+                $('#maintitle').css({
                     'transform': 'scale(1, ' +stretch +')',
                     'top': -stretch*10 +'px',
                 });
@@ -388,6 +418,7 @@ $(function(){
         var indexModel  = buildIndexModel();
         buildIndexView(indexModel);
         removeEmptyReferenceBlocks();
+        fixHeaders();
         fixReferences();
         fixImages();
         initMenu();

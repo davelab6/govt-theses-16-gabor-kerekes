@@ -9829,8 +9829,7 @@ if ( !noGlobal ) {
 
 return jQuery;
 }));
-;var H2P = (function () {
-
+;(function () {
 
     var masterID = '#master-page';
     var printConfigUrl = 'printConfig.json';
@@ -9859,7 +9858,6 @@ return jQuery;
                 })
         });
     }
-
     //loading content this way, instead of an iframe, because it's difficult to reset css in an iframe
     function loadContent() {
         return new Promise(function (resolve, reject) {
@@ -9870,12 +9868,15 @@ return jQuery;
                     var err = msg + " " + xhr.status + " " + xhr.statusText;
                     reject(err);
                 }
+
                 resolve(content);
             });
         });
     }
 
     function cleanContent(c) {
+        //cannot find excludes even though they're there
+        //console.log(c.find('.h2p-exclude').length);
         var content = c.find('.h2p-include');
         content.find('.h2p-exclude').remove();
         var contentWrapper = $('<div>').attr('id', 'content-source').append(content);
@@ -9968,7 +9969,7 @@ return jQuery;
     // this will trigger less to recompile styles with the custom page config variables
     // returns a promise
     function applyPageConfig(){
-        if(config.style['mirror-pages']){
+        if(config.style['mirror-pages'] === true){
             $(iFrame).contents().find('#pages').addClass('mirrored');
         }
         return iFrame.contentWindow.less.modifyVars(config['style']);
@@ -9997,13 +9998,14 @@ return jQuery;
 
 
     function onBeforeLayout(){
-        // have to disable scroll, because scrolling can interfere with CSSRegions lib's work
+        // have to temporarily disable scroll, because scrolling interferes with CSSRegions' work
         $(iFrame).contents().find('body').addClass('noScroll');
     }
 
 
-    // H2P's own tasks to be executed when layout is done
+    // tasks to be executed when layout is done
    function onAfterLayout () {
+        iFrame.contentWindow.document.dispatchEvent(new Event('layoutReady'));
         removeEmptyPages();
         var spinner = $('#loading-spinner').addClass('hidden');
         $(iFrame).contents().find('body').removeClass('noScroll');
@@ -10095,10 +10097,9 @@ return jQuery;
             .then(waitForLayoutToFinish)
             .then(onAfterLayout)
             .catch(function (err) {
-                console.log(err);
+                alert(err);
             });
     }, 1);
-
 
 })();
 

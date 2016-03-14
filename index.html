@@ -12,6 +12,7 @@
     <title>From Text to Process</title>
     <link rel="stylesheet" type="text/css" href="bower_components/css-reset/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/print.css" class="h2p-include">
 </head>
 <body>
     <header>
@@ -46,26 +47,23 @@
     </div>
 
     <div id="text-wrapper" class="h2p-include">
-        <section class="maintitle">
-            <div><span id="fromtext">From Text</span> <br><span id="toprocess">to Process</span></div>
-            <div>
+        <section id="maintitle">
+            <div class="title"><span id="fromtext">From Text</span> <br><span id="toprocess">to Process</span></div>
+            <div class="subtitle">
                 Bachelor Graphic Design Thesis by Gábor Kerekes<br>
                 Royal Academy of Art, The Hague, 2016
             </div>
         </section>
-        <section class="table-of-contents">
-            <h1 class="toc-header">Table of Contents</h1>
-            <ol id="toc-list">
-                <li>Abstract</li>
-                <li>1. Introduction – The World as Text</li>
-                <li>2. Literacy and power</li>
-                <li>3. Designer as agent</li>
-                <li>4. Code is law</li>
-                <li>5. Interfaces</li>
-                <li>6. The World as Process</li>
-                <li>Conclusion</li>
-            </ol>
-        </section>
+        <section id="table-of-contents">
+            <h1 class="toc-header">Contents</h1>
+             <div>0. <span>Abstract</span></div>
+             <div>1. <span>Introduction – The World as Text</span></div>
+             <div>2. <span>Literacy and power</span></div>
+             <div>3. <span>Designer as agent</span></div>
+             <div>4. <span>Code is law</span></div>
+             <div>5. <span>Interfaces</span></div>
+             <div>6. <span>The World as Process</span></div>
+             <div>7. <span>Conclusion</span></div></section>
 		<div id="content">
 
 		</div>
@@ -76,4 +74,5 @@
     </div>
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js" class="h2p-include"></script>
     <script type="text/javascript" rel="script"  src="js/main.js" class="h2p-include"></script>
+    <script type="text/javascript" rel="script"  src="js/print.js" class="h2p-include"></script>
 </body>

@@ -15,7 +15,7 @@
         "footer-height":    "0mm",
         "header-text":      "''",
         "footer-text":      "''",
-        "mirror-pages":     "true"
+        "mirror-pages":     "false"
     },
     "document": "index.html"
 

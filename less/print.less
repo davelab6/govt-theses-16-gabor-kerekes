@@ -1,202 +1,257 @@
 
 
 @import "fonts";
-@import "../print/osp.tools.html2print/src/less/variables.less";
-
-@media all {
 
 
 
-     #text-wrapper{
-         margin: 0;
 
-         #content{
+#text-wrapper{
 
-         }
+    a{
+        color: orangered;
+        text-decoration: none;
 
-         section{
-             padding: 0;
-             margin: 0;
-         }
+    }
 
-         .maintitle{
-             color: red !important;
-             //position: relative;
-             top: 0;
-             left: 0;
-             transform: translate(0, 0px);
-             width: 90%;
-             padding: 0;
-             //padding-left: 20%;
-             font-weight: bold;
-             z-index: 0;
-             line-height: 15pt;
-             margin: 0;
+    font-family: CharisSILW;
+    font-size: 11pt;
+    line-height: 13pt;
 
 
-             #fromtext, #toprocess{
+    #maintitle{
 
-                 line-height: 16pt;
-             }
+        position: relative;
+        top: 40mm;
+        .title{
+            font-size: 70pt;
+            line-height: 67pt;
+            font-weight: 900;
+            letter-spacing: -0.5mm;
+            #toprocess{
+                font-family: "Fira Mono";
+            }
+            margin-bottom: 5mm;
+        }
 
-             div:first-child{
-                 font-size: 100pt;
-                 line-height: 90pt;
-                 padding-bottom: 20mm;
-                 padding-top: 30mm;
-
-                 span:first-child:before{
-                     content: "   ";
-                     padding-bottom: 50mm;
-                 }
-
-                 span:nth-child(3){
-                     font-size: 90%;
-                     letter-spacing: -1mm;
-
-                 }
-
-             }
-
-             div:nth-child(2){
-                 font-size: 12pt;
-             }
-
-         }
-
-         .table-of-contents{
-             border: none;
-             padding: 0;
-             h1{
-                 font-size: 16pt;
-
-             }
-
-             #toc-list{
-                 font-size: 12pt;
-             }
-         }
-
-         #content {
-
-             section{
-                 padding: 0;
-                 margin: 0;
-             }
+        .subtitle{
+            font-size: 16pt;
+            line-height: 18pt;
+        }
+    }
 
 
 
-             h1{
-                 font-size: 40pt;
-                 margin: 0;
-                 text-align: left;
-                 padding: 0;
-                 padding-bottom: 10mm;
-                 padding-top: 0mm;
-             }
 
-             h2{
-                 font-size: 20pt;
-                 padding: 0;
-                 text-align: left;
-                 padding-top: 10mm;
-
-             }
-
-             p{
-                 width: @page-width;
-                 font-size: 14pt;
-                 line-height: 16pt;
-                 margin: 0;
-                 text-indent: 12mm;
-             }
-
-             blockquote{
-                 ol,p{
-                     padding: 0;
-                     font-size: 16pt;
-                     line-height: 17pt;
-                     padding-bottom: 10mm;
-                     padding-top: 10mm;
-                 }
-                 ol{
-                     padding-bottom: 0;
-                     margin: 0;
-                 }
-                 page-break-inside: avoid;
-             }
+    #table-of-contents{
+        font-size: 24pt;
 
 
-             .references{
-                 padding-top: 5mm;
-                 margin-left: 20mm;
-                 width: 110mm;
+        .toc-header{
+            margin-bottom: 30mm;
+            position: relative;
+            left: 35mm;
+        }
 
-                 &::before{
-                     margin-left: 12mm;
-                     margin-bottom: 5mm;
-                     font-size: 8pt;
-                     font-weight: normal;
-                 }
+        div{
+            font-size: 22pt;
+            text-align: left;
+            padding-bottom: 10mm;
+            padding-top: 4mm;
+            border-top: 0.5mm solid black;
+            text-indent: 10mm;
+            width: 100%;
+            font-size: 200%;
+            span{
+                margin-left: 15mm;
+            }
+        }
 
-                 ol{
-                     font-size: 8pt;
-                     width: 100%;
-                     line-height: 9pt;
-                     li{
-                         page-break-inside: avoid;
-                     }
-                 }
-
-             }
+    }
 
 
 
-             .image-container{
-                 display: block;
-                 width: @paper-width;
-                 height: 100%;
-                 padding-bottom: 10mm;
-                 padding-top: 10mm;
-                 position: relative;
-                 left: -30mm;
 
-                 img{
-                     width: 100%;
-                     display: block;
-                     float: none;
-                     padding: 0;
-                     margin: auto;
-                 }
-             }
-         }
-     }
+    .chapter-heading-wrapper{
+        font-size: 24pt;
+        display: inline-flex;
+        align-items: baseline;
+        margin-bottom: 0;
 
 
-     .break-before{
-         -webkit-region-break-before: always;
-     }
+        .chapter-number{
+            font-size:  35pt;
+            margin-right: 43mm;
+            font-weight: bold;
+        }
 
-     .break-after{
-         -webkit-region-break-after: always;
-     }
+        h1{
+            line-height: 34pt;
+             width: 63%;
+        }
+    }
+
+    .chapter-heading-wrapper + *{
+        margin-top: 40mm;
+    }
+
+    .chapter-heading-wrapper + blockquote{
+        margin-top: 15mm;
+        margin-bottom: 15mm;
+    }
+
+
+    p{
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 55mm;
+        margin-right: 10mm;
+        text-indent: 10mm;
+
+        &:first-of-type{
+            text-indent: 0;
+        }
+
+    }
+
+    blockquote + p{
+        text-indent: 0;
+    }
+
+    .image-container + p {
+        text-indent: 0;
+    }
+
+
+    h2{
+        margin-left: 55mm;
+        margin-bottom: 1.5mm;
+        margin-top: 10mm;
+    }
+
+    h2 ~ p{
+        margin-top: 0;
+    }
+
+    blockquote{
+        font-weight: bold;
+        font-size: 16pt;
+        line-height: 20pt;
+        break-inside: avoid;
+        margin: 0;
+        -webkit-margin-before: 0;
+        -webkit-margin-after: 0;
+        -webkit-margin-start: 0;
+        -webkit-margin-end: 0;
+        position: relative;
+        left: -40mm;
+        width: 200mm;
+        margin-top: 10mm;
+        margin-bottom: 10mm;
+        p{
+            margin: 0 !important;
+        }
+
+        ol{
+            margin-left: 50mm;
+            margin-right: 10mm;
+        }
+    }
+
+    .references{
+        font-family: "Fira Mono";
+        font-size: 7pt;
+        line-height: normal;
+        width: 60%;
+        margin-left: 20mm;
+        margin-top: 20mm;
+        position: relative;
+        left: 34mm;
+
+        &::before{
+            content: "References";
+            display: block;
+            margin-bottom: 5%;
+            font-size: 7pt;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        li{
+            list-style: decimal !important;
+        }
+
+    }
+
+    sup {
+        color: orangered;
+        font-size: 0.6em;
+        vertical-align: baseline;
+        position: relative;
+        top: -0.4em;
+    }
+
+
+    .image-container{
+        position: relative;
+        left: -25mm;
+        width: 190mm;
+        margin-top: 10mm;
+        margin-bottom: 10mm;
+
+        img{
+            width: 100%;
+        }
+
+    }
+
+
+    #NationState {
+        width: 160mm;
+        left: -10mm;
+        margin-top: 20mm;
+        margin-bottom: 20mm;
+
+    }
+
+    #OSIModel{
+        break-after: always;
+    }
+
+    #facebook_dossier{
+        left: -10mm;
+    }
+
+    iframe{
+        display: none;
+
+        & + p{
+            display: none;
+        }
+    }
+
 }
 
-@media print {
-    html {
-        width: @paper-width;
-        height: @paper-height;
-    }
+.paper{
+    .sidebar{
+        width: 30mm;
+        opacity: 0.9;
+        //background-color: #0b97c4;
+        height: 100%;
+        position: absolute;
+        top: 0;
 
-    body{
-        width: @paper-width;
-        height: @paper-height;
-    }
 
-    .paper{
-        width: @paper-width;
-        height: @paper-height;
+        .chapter-side-nav{
+            font-family: CharisSILW;
+            transform: rotate(-90deg);
+            opacity: 1;
+            font-weight: 900;
+            font-size: 20pt;
+            width: 150mm;
+            translate: -60mm 140mm;
+            text-align: right;
+        }
+
     }
 }
-
 
