@@ -387,7 +387,7 @@ $(function(){
         });
 
         $('#print-nav').click(function(){
-            window.location = "print.html"
+            window.location = "../h2p.html"
         });
 
     }

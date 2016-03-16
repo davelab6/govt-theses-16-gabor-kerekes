@@ -5262,7 +5262,7 @@ module.exports = (function(window, document, cssRegions) { "use strict";
 		cssCascade.polyfillStyleInterface('break-before');
 		cssCascade.polyfillStyleInterface('break-after');
 
-	}
+	};
 
 	// load the polyfill immediately if not especially told otherwise
 	if(!("cssRegionsManualTrigger" in window)) { cssRegions.enablePolyfill(); }

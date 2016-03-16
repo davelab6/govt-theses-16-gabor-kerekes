@@ -1,6 +1,3 @@
-/**
- * Created by GaborK on 10/03/16.
- */
 
 
 document.addEventListener('layoutReady', function(){
@@ -18,7 +15,6 @@ document.addEventListener('layoutReady', function(){
             sideBar.append($('<div>').addClass('chapter-side-nav').text(currentChapter));
             $(this).append(sideBar);
         }
-
     });
 
 });

@@ -6,12 +6,12 @@
     // things that will be hackily loaded into the iframe
     var dirName = 'osp.tools.html2print/';
     var dirPath = document.currentScript.src.split(dirName)[0] + dirName;
-    var libPaths = [    dirPath + 'lib/css-regions-polyfill/bin/css-regions-polyfill.min.js',
+    var libPaths = [    dirPath + 'lib/css-regions-polyfill/bin/css-regions-polyfill.js',
                         dirPath + 'lib/less/dist/less.min.js'
                     ];
     var h2pStylePath = dirPath + 'dist/less/html2print.less';
 
-    var config = null;
+    var userConfig = null;
     var iFrame = null;
 
 
@@ -31,7 +31,7 @@
     function loadContent() {
         return new Promise(function (resolve, reject) {
             var content = $('<div>');
-            content.load(config['document'], function (response, status, xhr) {
+            content.load(userConfig['document'], function (response, status, xhr) {
                 if (status == "error") {
                     var msg = "Something went wrong with loading content from " + url;
                     var err = msg + " " + xhr.status + " " + xhr.statusText;
@@ -68,13 +68,17 @@
         return scripts;
     }
 
-    function getStyle(){
-        return $('<link>').attr({
-            'rel': 'stylesheet/less',
-            'href': h2pStylePath,
-            'media': 'all',
-            'charset': 'utf-8'
-        })
+    function getStyles(){
+        var linkElem =  $('<link>').attr({
+                            'rel': 'stylesheet/less',
+                            'media': 'all',
+                            'charset': 'utf-8'
+                        });
+
+        return  [
+                    linkElem.attr('href', h2pStylePath),
+                    linkElem.clone().attr('href', userConfig['style'])
+                ];
     }
 
     function createPage(masterID, pageNum) {
@@ -112,16 +116,16 @@
 
         var body = buildIFrameBody(
                     [
-                        getStyle(),
+                        getStyles(),
                         getScripts(),
                         cleanContent(content),
-                        createPages(config['numPages'])
+                        createPages(userConfig['pages']['count'])
                     ]
         );
 
         var _iFrame = $('<iframe>').attr('id', 'viewport').prependTo('body').get(0);
         var doc = _iFrame.contentWindow.document;
-
+        _iFrame.contentWindow.cssRegionsManualTrigger = true;
         doc.open();
         doc.write(body.html());
         doc.close();
@@ -134,16 +138,23 @@
         });
     }
 
-
     // this will trigger less to recompile styles with the custom page config variables
     // returns a promise
     function applyPageConfig(){
-        if(config.style['mirror-pages'] === true){
+
+        if(userConfig['pages']['mirror'] === true){
             $(iFrame).contents().find('#pages').addClass('mirrored');
         }
-        return iFrame.contentWindow.less.modifyVars(config['style']);
+
+        // remove entries that should not be forwarded to less.js
+        delete userConfig['pages']['mirror'];
+        delete userConfig['pages']['count'];
+
+        // forward configs to less
+        return iFrame.contentWindow.less.modifyVars(userConfig['pages']);
     }
 
+    //  trims pages at when layout is done
     function removeEmptyPages() {
         var empty = $(iFrame.contentWindow.document).find('.paper').filter(function () {
             return $(this).find('cssregion').children().length === 0;
@@ -151,6 +162,10 @@
         empty.remove();
     }
 
+
+    //  subscribes to 'regionfragmentchange' event of CSSRegions,
+    //  which signals the end of the layout process
+    //  returns a promise that resolves when CSSRegions is done
     function waitForLayoutToFinish() {
         var flow = iFrame.contentWindow.document.getNamedFlow('contentflow');
         return new Promise(function(resolve){
@@ -165,7 +180,7 @@
     }
 
 
-
+    // tasks to be done before layout process starts
     function onBeforeLayout(){
         // have to temporarily disable scroll, because scrolling interferes with CSSRegions' work
         $(iFrame).contents().find('body').addClass('noScroll');
@@ -174,7 +189,9 @@
 
     // tasks to be executed when layout is done
    function onAfterLayout () {
-        iFrame.contentWindow.document.dispatchEvent(new Event('layoutReady'));
+       var layoutReady = new Event('layoutReady');
+        document.dispatchEvent(layoutReady);
+        iFrame.contentWindow.document.dispatchEvent(layoutReady);
         removeEmptyPages();
         var spinner = $('#loading-spinner').addClass('hidden');
         $(iFrame).contents().find('body').removeClass('noScroll');
@@ -183,70 +200,12 @@
         }, 2050);
     }
 
-    function initGUI(){
-        var doc = $(iFrame).contents().find("html");
 
-        $('[name="preview"]').change(function() {
-            if($(this).is(":checked")) {
-                doc.addClass("preview");
-                doc.removeClass("normal");
-            } else {
-                doc.removeClass("preview");
-                doc.addClass("normal");
-            }
-        });
-
-        $('[name="debug"]').change(function() {
-            if($(this).is(":checked")) {
-                doc.addClass("debug");
-            } else {
-                doc.removeClass("debug");
-            }
-        });
-
-        $('[name="spread"]').change(function() {
-            if($(this).is(":checked")) {
-                doc.addClass("spread");
-            } else {
-                doc.removeClass("spread");
-            }
-        });
-
-
-
-        function applyZoom(level){
-            doc.find("#pages").css({
-                "-webkit-transform": "scale(" + level + ")",
-                "-webkit-transform-origin": "0 0"
-            });
-        }
-
-        var prevZoom = localStorage.getItem('H2PZoom');
-        if(prevZoom){
-            $('[name="zoom"]').val(prevZoom*100);
-            applyZoom(prevZoom);
-        }
-
-        $('[name="zoom"]').change(function() {
-            var zoomLevel = $(this).val() / 100;
-            localStorage.setItem('H2PZoom', zoomLevel);
-            applyZoom(zoomLevel);
-        });
-
-
-        $('[name="page"]').change(function() {
-            var pageNumber = $(this).val() - 1;
-
-            var target = doc.find('.paper:eq(' + pageNumber + ')');
-            var offsetTop = target.offset().top;
-
-            doc.find('body').scrollTop(offsetTop);
-        });
-
-        $("#print").on('click', function() {
-            applyZoom(1);
-            $("iframe").get(0).contentWindow.print();
-        });
+    function showError(err){
+        var messageContainer = $('<div>').text('Oops, something is not right: ');
+        var errorContainer = $('<div>').text(err.stack);
+        var container = $('<div>').addClass('h2p-error-message').append([messageContainer, errorContainer]);
+        $('body').empty().addClass('h2p-error').append(container);
     }
 
 
@@ -254,19 +213,21 @@
     setTimeout(function () {
         loadPrintConfig()
             .then(function (conf) {
-                config = conf;
+                userConfig = conf;
                 return loadContent();
             })
             .then(buildIFrame)
             .then(function(){
                 onBeforeLayout();
-                initGUI();
                 return applyPageConfig();
             })
-            .then(waitForLayoutToFinish)
+            .then(function(){
+                iFrame.contentWindow.cssRegions.enablePolyfill();
+                return waitForLayoutToFinish();
+            })
             .then(onAfterLayout)
             .catch(function (err) {
-                alert(err);
+                showError(err);
             });
     }, 1);
 

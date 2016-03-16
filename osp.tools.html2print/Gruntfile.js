@@ -10,8 +10,8 @@ module.exports = function(grunt){
             },
             dist: {
                 src: [
-                        'lib/jquery/dist/jquery.js',
-                        'src/js/html2print.js'
+                        'src/js/html2print.js',
+                        'src/js/gui.js'
                 ],
                 dest:   'dist/js/html2print.js'
             }

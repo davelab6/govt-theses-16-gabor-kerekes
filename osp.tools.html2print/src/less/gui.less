@@ -28,6 +28,12 @@ html{
     align-items: center;
     -webkit-align-items: center;
     z-index: 999;
+
+
+    &.hidden{
+        display: none;
+    }
+
 }
 
 label {
@@ -89,7 +95,7 @@ iframe {
     height: 100vh;
     top: 0;
     left: 0;
-    background-color: rgba(0, 255, 255, 0.15);
+    background-color: rgba(0,0,0, 0.85);
 
     @keyframes fadeout{
         from { opacity: 0.8; }
@@ -123,7 +129,7 @@ iframe {
         margin: 0 auto;
         width: 15%;
         height: 15%;
-        background-color: #2e2e2e;
+        background-color: white;
         border-radius: 100%;
         -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
         animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;
@@ -225,14 +231,25 @@ iframe {
               transform: scale(1);
           }
     }
-
-
-
-
-
-
-
-
-
 }
+
+
+body.h2p-error{
+    margin: 0;
+    border: 2vw solid red;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    .h2p-error-message{
+        div:first-child{
+            padding-bottom: 2vh;
+        }
+
+        margin: auto;
+        font-size: 1.2em;
+        padding: 4vw;
+        font-family: monospace;
+    }
+}
+
 
