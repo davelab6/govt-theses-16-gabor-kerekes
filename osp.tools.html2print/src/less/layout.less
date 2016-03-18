@@ -39,52 +39,18 @@
     }
 }
 
-
-/* __________________________________ SIDEBARS __________________________________ */
-//.outside-bar{
-//    width: @outside-bar-width;
-//    height: @outside-bar-height;
-//    background-color: red;
-//}
-//
-//.inside-bar{
-//    width: @inside-bar-width;
-//    height: @inside-bar-height;
-//    background-color: red;
-//}
-
-
-
-
-#pages{
-
-    /* single page layout as default */
+/* mirrored pages */
+#pages.mirrored{
     .paper {
-        .header {
+        &:nth-child(even) .header {
             text-align: right;
         }
-        .page {
-            margin-left: @margin-inside;
-            margin-right: @margin-outside;
+
+        &:nth-child(even) .page {
+            padding-left: @margin-outside;
+            padding-right: @margin-inside;
         }
     }
-
-    /* mirrored pages */
-
-    &.mirrored{
-        .paper{
-            &:nth-child(even) .header {
-                text-align: left;
-            }
-
-            &:nth-child(even) .page {
-                margin-left: @margin-outside;
-                margin-right: @margin-inside;
-            }
-        }
-
-    }
-
 }
 
 

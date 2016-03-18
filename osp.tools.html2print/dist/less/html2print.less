@@ -153,15 +153,19 @@ body.noScroll {
             }
         }
     }
-
     .page {
         width: @page-width;
         height: @page-height;
         position: relative;
-        margin-top: @margin-top;
-        margin-bottom: @margin-bottom;
+
+        padding-top: @margin-top;
+        padding-bottom: @margin-bottom;
+        padding-left: @margin-inside;
+        padding-right: @margin-outside;
+
         display: inline-block;
         overflow: visible;
+
         .body {
             height: @body-height;
             width: @body-width;
@@ -267,52 +271,18 @@ body.noScroll {
     }
 }
 
-
-/* __________________________________ SIDEBARS __________________________________ */
-//.outside-bar{
-//    width: @outside-bar-width;
-//    height: @outside-bar-height;
-//    background-color: red;
-//}
-//
-//.inside-bar{
-//    width: @inside-bar-width;
-//    height: @inside-bar-height;
-//    background-color: red;
-//}
-
-
-
-
-#pages{
-
-    /* single page layout as default */
+/* mirrored pages */
+#pages.mirrored{
     .paper {
-        .header {
+        &:nth-child(even) .header {
             text-align: right;
         }
-        .page {
-            margin-left: @margin-inside;
-            margin-right: @margin-outside;
+
+        &:nth-child(even) .page {
+            padding-left: @margin-outside;
+            padding-right: @margin-inside;
         }
     }
-
-    /* mirrored pages */
-
-    &.mirrored{
-        .paper{
-            &:nth-child(even) .header {
-                text-align: left;
-            }
-
-            &:nth-child(even) .page {
-                margin-left: @margin-outside;
-                margin-right: @margin-inside;
-            }
-        }
-
-    }
-
 }
 
 
@@ -379,14 +349,18 @@ p {
     #pages {
         width: @paper-width; 
         height: @paper-height;
-
-        margin-left: auto;
-        margin-right: auto;
+        margin: auto;
     }
     .spread #pages {
         width: @paper-width * 2; 
         height: @paper-height * 2;
+        margin: auto;
     }
+
+    .spread .paper:nth-child(even){
+        border-right: 1px solid black;
+    }
+
     .paper {
         /* centrer la page à l'écran */
         background-color: white;

@@ -103,15 +103,19 @@ body.noScroll {
             }
         }
     }
-
     .page {
         width: @page-width;
         height: @page-height;
         position: relative;
-        margin-top: @margin-top;
-        margin-bottom: @margin-bottom;
+
+        padding-top: @margin-top;
+        padding-bottom: @margin-bottom;
+        padding-left: @margin-inside;
+        padding-right: @margin-outside;
+
         display: inline-block;
         overflow: visible;
+
         .body {
             height: @body-height;
             width: @body-width;

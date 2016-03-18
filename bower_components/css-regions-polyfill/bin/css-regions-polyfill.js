@@ -5103,7 +5103,6 @@ module.exports = (function(window, document, cssRegions) { "use strict";
 				this.relayout(); return;
 			}
 		}
-		
 	}
 
 	cssRegions.Flow.prototype.addEventListenersTo = function(nodes) {

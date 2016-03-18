@@ -1,0 +1,9 @@
+#h2p-viewport {
+  top: 7vh;
+}
+#h2p-toolbar #preview-checkbox,
+#h2p-toolbar #debug-checkbox,
+#h2p-toolbar #spread-checkbox,
+#h2p-toolbar #hires-checkbox {
+  display: none;
+}

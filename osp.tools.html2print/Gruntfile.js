@@ -21,7 +21,7 @@ module.exports = function(grunt){
             development: {
                 files: {
                     "dist/less/html2print.less":    "src/less/main.less",
-                    "dist/css/gui.css":             "src/less/gui.less"
+                    "dist/css/outerUI.css":             "src/less/outerUI.less"
                 }
             }
         },
@@ -36,7 +36,7 @@ module.exports = function(grunt){
             },
 
             styles:{
-                files: ['src/less/*.less'], // which files to watch
+                files: ['src/less/*.less'],
                 tasks: ['less'],
                 options: {
                     spawn: false

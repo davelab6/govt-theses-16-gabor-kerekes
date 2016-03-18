@@ -9,14 +9,18 @@
     #pages {
         width: @paper-width; 
         height: @paper-height;
-
-        margin-left: auto;
-        margin-right: auto;
+        margin: auto;
     }
     .spread #pages {
         width: @paper-width * 2; 
         height: @paper-height * 2;
+        margin: auto;
     }
+
+    .spread .paper:nth-child(even){
+        border-right: 1px solid black;
+    }
+
     .paper {
         /* centrer la page à l'écran */
         background-color: white;

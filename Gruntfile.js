@@ -10,16 +10,15 @@ module.exports = function(grunt) {
                     optimization: 2
                 },
                 files: {
-                    "css/main.css":  "less/main.less", // destination file and source file
+                    "css/main.css":  "less/main.less",
                     "css/print.css": "less/print.less",
-                    "css/print-debug.css": "less/print-debug.less",
-                    "css/html2print.css": "print/osp.tools.html2print/html2print/less/html2print.less"
+                    "css/h2p-ui.css": "less/h2p-ui.less"
                 }
             }
         },
         watch: {
             styles: {
-                files: ['less/**/*.less', 'print/osp.tools.html2print/html2print/less/*.less'], // which files to watch
+                files: ['less/**/*.less'],
                 tasks: ['less'],
                 options: {
                     nospawn: true

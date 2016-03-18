@@ -308,7 +308,6 @@ header{
         top: 10vh;
         left: 50%;
         transform: translate(-50%, 0);
-        z-index: 999999999;
         width: 100vw;
         height: 100vh;
         color: @foreground;
@@ -343,8 +342,11 @@ header{
         #toc-list{
             font-size: 2em;
             line-height: 1.5em;
-            li{
+            div{
                 border-bottom: 1px solid black;
+            }
+            div:first-child{
+                border-top: 1px solid black;
             }
         }
 
@@ -364,13 +366,17 @@ header{
 
 
 
-        h1{
+        .chapter-heading-wrapper{
             font-weight: bold;
             font-size: 5em;
             line-height: 1em;
-            padding-bottom: 6vh;
+            padding-bottom: 15vh;
             padding-left: 3vw;
             padding-right: 3vw;
+            .chapter-number{
+                text-align: center;
+                padding-bottom: 5vh;
+            }
         }
 
         h2{
@@ -397,6 +403,10 @@ header{
                 text-indent: 0;
             }
 
+        }
+
+        .image-container + p, blockquote + p {
+            text-indent: 0;
         }
 
         blockquote{
@@ -454,11 +464,15 @@ header{
 
         sup{
             color: @link-color;
-            font-size: 0.5em;
+            font-size: 0.6em;
+            vertical-align: baseline;
+            position: relative;
+            top: -0.4em;
         }
 
 
         .image-container{
+            margin: auto;
             width: 100%;
             margin: auto;
             height: 100px;
@@ -471,6 +485,26 @@ header{
             padding-top: 5vh;
             padding-bottom: 5vh;
             margin: 0;
+
+            img{
+                width:100%;
+                max-width:100vw;
+            }
+        }
+
+
+        #NationState{
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding-top: 20vh;
+            padding-bottom: 20vh;
+            img{
+                padding-bottom: 0;
+                width: 50%;
+                height: 50%;
+                margin: 0;
+            }
         }
 
         iframe{
