@@ -4,44 +4,6 @@
 
 $(function(){
 
-
-    function loadContent(){
-        var htmlcontent = [];
-        var jqxhr = null;
-        [
-            "0_abstract.html",
-            "1_introduction–the-world-as-text.html",
-            "2_literacy-and-power.html",
-            "3_designer-as-agent.html",
-            "4_software-as-policy.html",
-            "5_interfaces.html",
-            "6_the-world-as-process.html",
-            "7_conclusion.html"
-
-        ].forEach(function(title, index){
-            jqxhr = $.get('content/html/'+title, function(data){
-                htmlcontent[index] = data;
-            });
-        });
-
-        jqxhr.done(function(){
-            htmlcontent.forEach(function(content){
-                var c = $(content);
-                //fix image sources
-                c.find('img').each(function(){
-                    var src = $(this).attr('src');
-                    var splitSrc = src.split("/");
-                    var fname = splitSrc[splitSrc.length-1];
-                    $(this).attr('src', 'content/imgs/'+fname);
-                });
-                $('#content').append(c);
-            });
-        });
-
-        return jqxhr;
-    }
-
-
     function buildIndexModel(){
         var ignoreTags = ['citation'];
         var index = {
@@ -281,7 +243,7 @@ $(function(){
                 var id = $(this).attr('id');
                 var listItem = $('<li>').attr('id', id);
                 var html = $(this).find('p').first().html();
-                listItem.html( html.substring(3, html.length) );
+                $('<span>').append( html.substring(3, html.length)).appendTo(listItem);
                 listItem.appendTo(list);
             });
             list.insertBefore(this);
@@ -341,9 +303,19 @@ $(function(){
     }
 
 
-    function print(){
-        // to be implemented properly
-        // print stylesheet only works in chrome so for now this will just link to a pdf exported with that stylesheet
+
+    function prepareForPrint(){
+        $('#maintitle').addClass('h2p-break-after');
+        $('#table-of-contents').addClass('h2p-break-after');
+        $('section').each(function(){
+            if($(this).hasClass('level1')){
+                $(this).addClass('h2p-break-after');
+            }
+        });
+        $('iframe').each(function(){
+            $(this).addClass('.h2p-exclude');
+        });
+
     }
 
 
@@ -360,7 +332,7 @@ $(function(){
 
         $('#index-nav').click(function(){
              $('body').css('overflow-y', 'hidden');
-            $('.maintitle').hide();
+            $('#maintitle').hide();
              $('#index').slideDown(150, function(){
                  $(this).removeClass('hidden');
              });
@@ -375,13 +347,20 @@ $(function(){
                 $(this).addClass('hidden');
                 $('body').css('overflow-y', 'auto');
             });
-            $('.maintitle').show();
+            $('#maintitle').show();
             $('header').removeClass('dark');
         });
 
-        $('#print-nav').click(function(){
-            document.contentWindow.print();
+        $('.nav-item').not('#print-nav').click(function(){
+           if(H2P.isInitialized()){
+               H2P.remove();
+           }
         });
+
+        $('#print-nav').click(function(){
+            H2P.init();
+        });
+
     }
 
 
@@ -392,7 +371,7 @@ $(function(){
             if($(document).scrollTop() < window.innerHeight){
                 var stretch = sctop.map(0, window.innerHeight, 1, 100);
                 console.log(sctop, stretch);
-                $('.maintitle').css({
+                $('#maintitle').css({
                     'transform': 'scale(1, ' +stretch +')',
                     'top': -stretch*10 +'px',
                 });
@@ -404,6 +383,7 @@ $(function(){
 
 
     loadContent().done(function(){
+
         var indexModel  = buildIndexModel();
         buildIndexView(indexModel);
         removeEmptyReferenceBlocks();
@@ -411,6 +391,9 @@ $(function(){
         fixReferences();
         fixImages();
         initMenu();
+        prepareForPrint();
+        //distortTitle();
+        //createMap();
     });
 
 
@@ -444,4 +427,3 @@ $(function(){
     }
 
 });
-

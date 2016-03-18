@@ -1,0 +1,26 @@
+{
+  "name": "govt-theses-16-gabor-kerekes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kabk/govt-theses-16-gabor-kerekes.git"
+  },
+  "author": "Gabor Kerekes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kabk/govt-theses-16-gabor-kerekes/issues"
+  },
+  "homepage": "https://github.com/kabk/govt-theses-16-gabor-kerekes#readme",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-less": "^1.2.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "jit-grunt": "^0.10.0"
+  }
+}

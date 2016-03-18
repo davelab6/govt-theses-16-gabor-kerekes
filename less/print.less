@@ -1,0 +1,262 @@
+
+
+@import "fonts";
+
+
+
+
+#text-wrapper{
+
+    a{
+        color: orangered;
+        text-decoration: none;
+
+    }
+
+    font-family: CharisSILW;
+    font-size: 11pt;
+    line-height: 13pt;
+
+
+    #maintitle{
+
+        position: relative;
+        top: 40mm;
+        .title{
+            font-size: 70pt;
+            line-height: 67pt;
+            font-weight: 900;
+            letter-spacing: -0.5mm;
+            #toprocess{
+                font-family: "Fira Mono";
+            }
+            margin-bottom: 5mm;
+        }
+
+        .subtitle{
+            font-size: 16pt;
+            line-height: 18pt;
+        }
+    }
+
+
+
+
+    #table-of-contents{
+        font-size: 24pt;
+
+
+        .toc-header{
+            margin-bottom: 30mm;
+            position: relative;
+            left: 35mm;
+        }
+
+        div{
+            font-size: 22pt;
+            text-align: left;
+            padding-bottom: 10mm;
+            padding-top: 4mm;
+            border-top: 0.5mm solid black;
+            text-indent: 10mm;
+            width: 100%;
+            font-size: 200%;
+            span{
+                margin-left: 15mm;
+            }
+        }
+
+    }
+
+
+
+
+    .chapter-heading-wrapper{
+        font-size: 24pt;
+        display: inline-flex;
+        align-items: baseline;
+        margin-bottom: 0;
+
+
+        .chapter-number{
+            font-size:  35pt;
+            margin-right: 43mm;
+            font-weight: bold;
+        }
+
+        h1{
+            line-height: 34pt;
+             width: 63%;
+        }
+    }
+
+    .chapter-heading-wrapper + *{
+        margin-top: 40mm;
+    }
+
+    .chapter-heading-wrapper + blockquote{
+        margin-top: 15mm;
+        margin-bottom: 15mm;
+    }
+
+
+    p{
+        margin-bottom: 0;
+        margin-top: 0;
+        margin-left: 55mm;
+        margin-right: 10mm;
+        text-indent: 10mm;
+
+        &:first-of-type{
+            text-indent: 0;
+        }
+
+    }
+
+    blockquote + p{
+        text-indent: 0;
+    }
+
+    .image-container + p {
+        text-indent: 0;
+    }
+
+
+    h2{
+        margin-left: 55mm;
+        margin-bottom: 1.5mm;
+        margin-top: 10mm;
+    }
+
+    h2 ~ p{
+        margin-top: 0;
+    }
+
+    blockquote{
+        font-weight: bold;
+        font-size: 16pt;
+        line-height: 20pt;
+        break-inside: avoid;
+        margin: 0;
+        -webkit-margin-before: 0;
+        -webkit-margin-after: 0;
+        -webkit-margin-start: 0;
+        -webkit-margin-end: 0;
+        position: relative;
+        left: -40mm;
+        width: 200mm;
+        margin-top: 10mm;
+        margin-bottom: 10mm;
+        p{
+            margin: 0 !important;
+        }
+
+        ol{
+            margin-left: 50mm;
+            margin-right: 10mm;
+        }
+    }
+
+    .references{
+        font-family: "Fira Mono";
+        font-size: 7pt;
+        line-height: normal;
+        width: 60%;
+        margin-left: 20mm;
+        margin-top: 20mm;
+        position: relative;
+        left: 34mm;
+
+        &::before{
+            content: "References";
+            display: block;
+            margin-bottom: 5%;
+            font-size: 7pt;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        li{
+            list-style: decimal !important;
+        }
+
+    }
+
+    sup {
+        color: orangered;
+        font-size: 0.6em;
+        vertical-align: baseline;
+        position: relative;
+        top: -0.4em;
+    }
+
+
+    .image-container{
+        position: relative;
+        left: -25mm;
+        width: 190mm;
+        margin-top: 10mm;
+        margin-bottom: 10mm;
+
+        img{
+            width: 100%;
+        }
+
+    }
+
+
+    #NationState {
+        width: 160mm;
+        left: -10mm;
+        margin-top: 20mm;
+        margin-bottom: 20mm;
+
+    }
+
+    #OSIModel{
+        break-after: always;
+    }
+
+    #facebook_dossier{
+        left: -10mm;
+    }
+
+    iframe{
+        display: none;
+
+        & + p{
+            display: none;
+        }
+    }
+
+}
+
+.paper{
+    .sidebar{
+        width: 30mm;
+        opacity: 0.9;
+        //background-color: #0b97c4;
+        height: 100%;
+        position: absolute;
+        top: 0;
+
+
+        .chapter-side-nav{
+            font-family: CharisSILW;
+
+            -webkit-transform: rotate(-90deg) translate(-120mm, -50mm);
+            -moz-transform: rotate(-90deg) translate(-120mm, -50mm);
+            -ms-transform: rotate(-90deg) translate(-120mm, -50mm);
+            -o-transform: rotate(-90deg) translate(-120mm, -50mm);
+            transform: rotate(-90deg) translate(-120mm, -50mm);
+
+            opacity: 1;
+            font-weight: 900;
+            font-size: 20pt;
+            width: 150mm;
+            text-align: right;
+        }
+
+    }
+}
+

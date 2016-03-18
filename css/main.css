@@ -434,3 +434,8 @@ header a:hover {
     padding-bottom: 5vh;
   }
 }
+#map {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
