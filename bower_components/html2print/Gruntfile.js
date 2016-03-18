@@ -4,16 +4,13 @@ module.exports = function(grunt){
 
     // Project configuration.
     grunt.initConfig({
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: [
-                        'src/js/html2print.js',
-                        'src/js/gui.js'
-                ],
-                dest:   'dist/js/html2print.js'
+        copy:{
+            main:{
+                files:[
+                        { expand: true, flatten: true, src: ['src/js/*'], dest: 'dist/js/', filter: 'isFile' },
+                        { expand: true, flatten: true, src: ['src/fonts/*'], dest: 'dist/fonts/', filter: 'isFile' },
+                        { expand: true, flatten: true, src: ['src/html/*'], dest: 'dist/html/', filter: 'isFile' },
+                ]
             }
         },
 
@@ -29,7 +26,7 @@ module.exports = function(grunt){
         watch: {
             scripts: {
                 files: ['src/js/*.js'],
-                tasks: ['concat'],
+                tasks: ['copy'],
                 options: {
                     spawn: false
                 }
@@ -41,6 +38,16 @@ module.exports = function(grunt){
                 options: {
                     spawn: false
                 }
+            },
+
+            html:{
+                files: ['src/html/*.html'],
+                tasks: ['copy']
+            },
+
+            fonts:{
+                files: ['src/fonts/*'],
+                tasks: ['copy']
             }
         }
     });
