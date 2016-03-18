@@ -1,6 +1,6 @@
 
 
-document.addEventListener('layoutReady', function(){
+H2P.doAfterLayout( function(){
 
     var currentChapter = null;
     $('.paper').each(function(){

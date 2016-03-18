@@ -1,14 +1,13 @@
 {
   "name": "html2print",
   "homepage": "https://github.com/krksgbr/html2print",
-  "_release": "7a3ee8b30b",
+  "_release": "933c0e0a69",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "7a3ee8b30b2b6cb5413a8109e6462c3d1e2d9882"
+    "commit": "933c0e0a69698efba5ade4583193564ad2aaa1e9"
   },
   "_source": "https://github.com/krksgbr/html2print.git",
   "_target": "*",
-  "_originalSource": "https://github.com/krksgbr/html2print.git",
-  "_direct": true
+  "_originalSource": "https://github.com/krksgbr/html2print.git"
 }
