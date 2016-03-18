@@ -262,30 +262,29 @@ header a:hover {
   #text-wrapper {
     margin-top: 7vh;
   }
-  #text-wrapper .maintitle {
+  #text-wrapper #maintitle {
     position: relative;
     top: 10vh;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 999999999;
     width: 100vw;
     height: 100vh;
     color: black;
     padding-left: 100px;
     font-weight: bold;
   }
-  #text-wrapper .maintitle #toprocess {
+  #text-wrapper #maintitle #toprocess {
     font-family: "Fira Code";
     font-style: italic;
     font-weight: 900;
   }
-  #text-wrapper .maintitle div:first-child {
+  #text-wrapper #maintitle div:first-child {
     font-size: 14vw;
   }
-  #text-wrapper .maintitle div:nth-child(2) {
+  #text-wrapper #maintitle div:nth-child(2) {
     font-size: 3vw;
   }
-  #text-wrapper .table-of-contents {
+  #text-wrapper #table-of-contents {
     border-bottom: 2px solid black;
     border-top: 2px solid black;
     display: flex;
@@ -295,14 +294,17 @@ header a:hover {
     padding-bottom: 20vh;
     padding-top: 10vh;
   }
-  #text-wrapper .table-of-contents #toc-list {
+  #text-wrapper #table-of-contents #toc-list {
     font-size: 2em;
     line-height: 1.5em;
   }
-  #text-wrapper .table-of-contents #toc-list li {
+  #text-wrapper #table-of-contents #toc-list div {
     border-bottom: 1px solid black;
   }
-  #text-wrapper .table-of-contents h1 {
+  #text-wrapper #table-of-contents #toc-list div:first-child {
+    border-top: 1px solid black;
+  }
+  #text-wrapper #table-of-contents h1 {
     font-size: 5em;
     font-weight: bold;
     padding-bottom: 6vh;
@@ -342,6 +344,10 @@ header a:hover {
     text-indent: 5%;
   }
   #text-wrapper #content p:first-of-type {
+    text-indent: 0;
+  }
+  #text-wrapper #content .image-container + p,
+  #text-wrapper #content blockquote + p {
     text-indent: 0;
   }
   #text-wrapper #content blockquote {
@@ -427,13 +433,4 @@ header a:hover {
     padding-top: 5vh;
     padding-bottom: 5vh;
   }
-}
-#map {
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.printframe {
-  width: 100vw;
-  height: 3000px;
 }
